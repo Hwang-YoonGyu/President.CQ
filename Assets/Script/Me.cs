@@ -39,6 +39,7 @@ public class Me : User
     public override void Submit(string cardcode)
     {
         userCard.Remove(cardcode);
+
     }
 
 

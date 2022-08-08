@@ -44,19 +44,25 @@ public abstract class User : MonoBehaviour
 
     public void changeColor(string lastValue)
     {
-
-        for (int i = 0; i < cardObjList.Count; i++)
+        if (lastValue == "no")
         {
-
-            if (!submitCard(lastValue, cardObjList[i].GetComponent<Card>().CardCode))
+            for (int i = 0; i < cardObjList.Count; i++)
             {
                 cardObjList[i].GetComponentInChildren<SpriteRenderer>().color = new Color(52, 52, 52, 255);
             }
-
         }
 
+        else
+        {
+            for (int i = 0; i < cardObjList.Count; i++)
+            {
 
+                if (!submitCard(lastValue, cardObjList[i].GetComponent<Card>().CardCode))
+                {
+                    cardObjList[i].GetComponentInChildren<SpriteRenderer>().color = new Color(52, 52, 52, 255);
+                }
 
-
+            }
+        }
     }
 }
