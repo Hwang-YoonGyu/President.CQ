@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class User : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public abstract class User : MonoBehaviour
             for (int i = 0; i < cardObjList.Count; i++)
             {
                 Debug.Log("돌았다!");
-                cardObjList[i].GetComponentInChildren<SpriteRenderer>().color = new Color(52, 52, 52, 255);
+                cardObjList[i].GetComponentInChildren<Image>().color = new Color(52, 52, 52, 255);
             }
         }
 
@@ -60,7 +61,7 @@ public abstract class User : MonoBehaviour
 
                 if (!submitCard(lastValue, cardObjList[i].GetComponent<Card>().CardCode))
                 {
-                    cardObjList[i].GetComponentInChildren<SpriteRenderer>().color = new Color(52, 52, 52, 255);
+                    cardObjList[i].GetComponentInChildren<Image>().color = new Color(52, 52, 52, 255);
                 }
 
             }
