@@ -180,6 +180,15 @@ public class GameManager : MonoBehaviour
         stopSwitch = false;
         Pass();
     }
+
+
+
+    /*---------------------------------------------------------------------------------------*/
+    /*---------------------------------------------------------------------------------------*/
+    /*---------------------------------------------------------------------------------------*/
+
+
+
     public void SubmittedRPC(List<string> list) {
         pv.RPC("Submitted", RpcTarget.All, list);
     }
@@ -260,31 +269,53 @@ public class GameManager : MonoBehaviour
         temp.GetComponentInChildren<Card>().CardCode = list[count - 1];
         temp.GetComponentInChildren<Card>().setCardImg();
     }
-    [PunRPC]
-    public void setTurn(string username) {
-        currentTurnUser = username;
-        StartCoroutine(CountTime());
+
+    /*---------------------------------------------------------------------------------------*/
+    /*---------------------------------------------------------------------------------------*/
+    /*---------------------------------------------------------------------------------------*/
+
+    [PunRPC] //01
+    public void RoundStart()
+    {
+        //새로운 라운드 시작
+        userList[0].SpreadCard(); // 나의 덱에 카드를 뿌리고
+        if (userList[0].userCard.Contains("D01")) {
+            pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
+        }
+
     }
 
-    [PunRPC]
-    public void TurnStart(string userName) {
+    [PunRPC] //02
+    public void TurnStart(string userName)
+    {
         if (userName == PhotonNetwork.NickName)
         {
             pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
             ControlSwitch = true;
             turnText.text = userName;
-            userList[0].changeColor(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count-1]);
+            userList[0].changeColor(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count - 1]);
         }
-        else {
+        else
+        {
             ControlSwitch = false;
         }
     }
+
+    [PunRPC] //03
+    public void setTurn(string username)
+    {
+        currentTurnUser = username;
+        StartCoroutine(CountTime());
+    }
+
+
+
     [PunRPC]
     public void TurnNext()
     {
         int index;
-        index = userList.FindIndex(x=> x.Name==currentTurnUser);
-        TurnStart(userList[(index + 1)%4].Name);
+        index = userList.FindIndex(x => x.Name == currentTurnUser);
+        TurnStart(userList[(index + 1) % 4].Name);
     }
     [PunRPC]
     public void TurnEnd(string userName)
@@ -299,16 +330,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    public void RoundStart()
-    {
-        //새로운 라운드 시작
-        userList[0].SpreadCard(); // 나의 덱에 카드를 뿌리고
-        if (userList[0].userCard.Contains("D01")) {
-            pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
-        }
 
-    }
     [PunRPC]
     public void RoundEnd()
     {
@@ -339,6 +361,14 @@ public class GameManager : MonoBehaviour
         //덱(나의 덱, 게임 덱)에올라와 있는 카드를 쓸어담아서 (오브젝트 파괴)
         initCardDeck();// 카드 덱에 주워담아 정리해주고
     }
+
+
+
+
+    /*---------------------------------------------------------------------------------------*/
+    /*---------------------------------------------------------------------------------------*/
+    /*---------------------------------------------------------------------------------------*/
+
     [PunRPC]
     public void giveCard(string userName, string cardcode)
     {
