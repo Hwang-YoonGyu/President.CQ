@@ -48,6 +48,7 @@ public abstract class User : MonoBehaviour
         {
             for (int i = 0; i < cardObjList.Count; i++)
             {
+                Debug.Log("돌았다!");
                 cardObjList[i].GetComponentInChildren<SpriteRenderer>().color = new Color(52, 52, 52, 255);
             }
         }
