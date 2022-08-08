@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -10,6 +11,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     private bool isInDeck;
     public User user;
     public GameManager gameManager;
+    private bool isSelected;
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (gameManager.ControlSwitch)
@@ -77,5 +79,29 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public void setCardImg() {
         gameObject.GetComponent<CardVO>().setCardImg(CardCode);
 
+    }
+
+    private void OnMouseDown()
+    {
+        gameObject.GetComponent<GameManager>().myDeck.GetComponent<Collider2D>();
+        isSelected = true;
+    }
+    public IEnumerator CardSelect(GameObject c)
+    {
+        c.SetActive(true);
+        RectTransform rect = c.GetComponent<RectTransform>();
+        float t = 0.0f;
+        if (isSelected == true)
+        {
+            while (t <= 0.1f)
+            {
+                rect.position = new Vector3(0, 0 + t, 0);
+                yield return null;
+            }
+        }
+        else
+        {
+            rect.position = new Vector3(0, t - 1, 0);
+        }
     }
 }
