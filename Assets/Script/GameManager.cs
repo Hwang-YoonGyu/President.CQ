@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public Button pass_button;
 
     public Text timeText;
+    public Text turnText;
 
     public PhotonView pv;
     public User user;
@@ -187,16 +188,9 @@ public class GameManager : MonoBehaviour
     //1.2 낸카드 정렬(deck)
 
     //2. 제출 버튼 누르면
-    //2.1 User 카드리스트의 낸 카드는 비워지고
-    //2.2 SubCard는 비워지고
-    //2.3 SubmittedCard는 채워지고
-    //2.4 SubmittedCard에 있는 카드들을 deck의 child로 
-    //2.5 nextTurn
-
+    
     //3. 제출 버튼을 누르지 않으면(pass or countdown)
-    //3.1 SubCard는 비워지고
-    //3.2 이동된 카드 다시 원 위치(mydeck)
-    //3.3 nextTurn
+    
     public void Temp(string cardcode)
     {
         Debug.Log(cardcode + "덱에 올림");
@@ -278,6 +272,7 @@ public class GameManager : MonoBehaviour
         {
             pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
             ControlSwitch = true;
+            turnText.text = userName;
             userList[0].changeColor(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count-1]);
         }
         else {
