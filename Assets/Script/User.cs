@@ -50,7 +50,7 @@ public abstract class User : MonoBehaviour
             for (int i = 0; i < cardObjList.Count; i++)
             {
                 Debug.Log("돌았다!");
-                cardObjList[i].GetComponentInChildren<Image>().color = new Color(52, 52, 52, 255);
+                cardObjList[i].transform.FindChild("Card").gameObject.GetComponent<Image>().color = new Color(0,0,0,255);
             }
         }
 
