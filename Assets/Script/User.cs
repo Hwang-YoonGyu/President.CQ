@@ -15,10 +15,12 @@ public abstract class User : MonoBehaviour
     public abstract void SetName();
     public abstract void SpreadCard();
 
-    public void printCardList() {
-        Debug.Log(Name+"의 카드 : ");
+    public void printCardList()
+    {
+        Debug.Log(Name + "의 카드 : ");
 
-        foreach (string s in userCard) {
+        foreach (string s in userCard)
+        {
             Debug.Log(s);
         }
     }
@@ -50,7 +52,7 @@ public abstract class User : MonoBehaviour
             for (int i = 0; i < cardObjList.Count; i++)
             {
                 Debug.Log("돌았다!");
-                cardObjList[i].transform.FindChild("Card").gameObject.GetComponent<Image>().color = new Color(0,0,0,255);
+                cardObjList[i].transform.Find("Card").gameObject.GetComponent<Image>().color = new Color(100, 100, 100, 255);
             }
         }
 
@@ -61,9 +63,9 @@ public abstract class User : MonoBehaviour
 
                 if (!submitCard(lastValue, cardObjList[i].GetComponent<Card>().CardCode))
                 {
-                    cardObjList[i].GetComponentInChildren<Image>().color = new Color(52, 52, 52, 255);
-                }
+                    cardObjList[i].transform.Find("Card").gameObject.GetComponent<Image>().color = new Color(100, 100, 100, 255);
 
+                }
             }
         }
     }
