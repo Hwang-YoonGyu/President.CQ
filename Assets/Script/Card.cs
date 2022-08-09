@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 
-public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
     public string CardCode = "H13";
     public RectTransform rect;
@@ -12,6 +12,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public User user;
     public GameManager gameManager;
     private bool isSelected;
+    private int count = 0;
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (gameManager.ControlSwitch)
@@ -21,6 +22,22 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         }
 
     }
+
+    public void OnPointerClick(PointerEventData eventdata)
+    {
+        count++;
+        //올라가라
+        if (count % 2 == 1)
+        {
+            rect.position = rect.position +  new Vector3(0f, 50f, 0f);
+        }
+        //내려가라
+        else
+        {
+            rect.position = rect.position + new Vector3(0f, -50f, 0f);
+        }
+    }
+
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -86,7 +103,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         gameObject.GetComponent<GameManager>().myDeck.GetComponent<Collider2D>();
         isSelected = true;
     }
-    public IEnumerator CardSelect(GameObject c)
+   /* public IEnumerator CardSelect(GameObject c)
     {
         c.SetActive(true);
         RectTransform rect = c.GetComponent<RectTransform>();
@@ -103,5 +120,5 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {
             rect.position = new Vector3(0, t - 1, 0);
         }
-    }
+    }*/
 }
