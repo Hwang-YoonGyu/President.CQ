@@ -203,9 +203,9 @@ public class GameManager : MonoBehaviour
         tempCard.Add(cardcode); //1.1
         if (submittedCard.Count==0)
         {
-            ArrangeCard1(deckPoint, tempCard.Count, tempCard);//1.2
+            ArrangeCard1(deck, deckPoint, tempCard.Count, tempCard);//1.2
         }
-        else ArrangeCard1(deckPoint, submittedCard.Count, submittedCard);//1.2
+        else ArrangeCard1(deck, deckPoint, submittedCard.Count, submittedCard);//1.2
     }
     public void Submit()
     {
@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
         //3.3 nextTurn
 
         tempCard.Clear();//3.1
-        ArrangeCard1(myDeckPoint, user.userCard.Count, user.userCard);//3.2
+        ArrangeCard1(myDeck, myDeckPoint, user.userCard.Count, user.userCard);//3.2
         stopSwitch = true;
     }
     [PunRPC]
@@ -258,12 +258,12 @@ public class GameManager : MonoBehaviour
 
     }
     [PunRPC]
-    public void ArrangeCard1(RectTransform rect, int count, List<string> list )// 일단 실험삼아 만들어놓음 나중에 이름 바꿀게
+    public void ArrangeCard1(GameObject obj, RectTransform rect, int count, List<string> list )// 일단 실험삼아 만들어놓음 나중에 이름 바꿀게
     {
         GameObject temp = Instantiate(card, rect.position, Quaternion.identity); //재생성
 
         temp.gameObject.GetComponent<RectTransform>().SetPositionAndRotation(new Vector3(rect.position.x + (count - 1) * 30, rect.position.y, 0), Quaternion.identity);
-        temp.GetComponent<RectTransform>().SetParent(deck.GetComponent<RectTransform>());
+        temp.GetComponent<RectTransform>().SetParent(obj.GetComponent<RectTransform>());
         temp.name = list[count - 1];
         temp.GetComponent<Card>().CardCode = list[count - 1];
         temp.GetComponent<Card>().setCardImg();
@@ -278,7 +278,11 @@ public class GameManager : MonoBehaviour
     {
         //새로운 라운드 시작
         user.SpreadCard(); // 나의 덱에 카드를 뿌리고
-        if (userList[0].userCard.Contains("D01")) {
+        /*if (userList[0].userCard.Contains("D01")) {
+            pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
+        }*/
+        if(PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
+        {
             pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
         }
 

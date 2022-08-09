@@ -17,7 +17,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (gameManager.ControlSwitch)
         {
             wasPosition = rect.position;
-            rect.parent.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            rect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
 
     }
@@ -26,7 +26,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         if (gameManager.ControlSwitch)
         {
-            rect.parent.position = eventData.position;
+            rect.position = eventData.position;
         }
     }
 
@@ -34,7 +34,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         if (gameManager.ControlSwitch)
         {
-            rect.parent.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            rect.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             if (isInDeck)
             {
@@ -43,7 +43,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 //user.Submit(CardCode);
 
                 //�ı�
-                Destroy(rect.parent.gameObject);
+                Destroy(rect.gameObject);
                 //gameManager.SubmittedRPC(CardCode);
 
             }
