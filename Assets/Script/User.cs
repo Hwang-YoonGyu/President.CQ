@@ -15,15 +15,6 @@ public abstract class User : MonoBehaviour
     public abstract void SetName();
     public abstract void SpreadCard();
 
-    public void printCardList()
-    {
-        Debug.Log(Name + "의 카드 : ");
-
-        foreach (string s in userCard)
-        {
-            Debug.Log(s);
-        }
-    }
 
     public bool submitCard(string lastValue, string cardcode)
     {

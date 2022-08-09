@@ -294,7 +294,7 @@ MonoBehaviour:
   cardObjList: []
   nameText: {fileID: 823854581}
   myDeck: {fileID: 2014792742}
-  card: {fileID: 3850010391593021500, guid: 16bd8ae04e325411db5f538f69478b52, type: 3}
+  card: {fileID: 80280848068272022, guid: a43db947dc8164af48be0965167909b6, type: 3}
 --- !u!1 &235699023
 GameObject:
   m_ObjectHideFlags: 0
@@ -3612,7 +3612,7 @@ MonoBehaviour:
   tempCard: []
   myDeck: {fileID: 2014792742}
   deck: {fileID: 1950569199}
-  card: {fileID: 3850010391593021500, guid: 16bd8ae04e325411db5f538f69478b52, type: 3}
+  card: {fileID: 80280848068272022, guid: a43db947dc8164af48be0965167909b6, type: 3}
   deckPoint: {fileID: 1950569200}
   myDeckPoint: {fileID: 2014792743}
   start_button: {fileID: 1261214743}

@@ -29,8 +29,8 @@ public class Me : User
 
             temp.GetComponent<RectTransform>().SetParent(myDeck.GetComponent<RectTransform>());
             temp.name = s;
-            temp.GetComponentInChildren<Card>().CardCode = s;
-            temp.GetComponentInChildren<Card>().setCardImg();
+            temp.GetComponent<Card>().CardCode = s;
+            temp.GetComponent<Card>().setCardImg();
             i++;
             cardObjList.Add(temp);
         }

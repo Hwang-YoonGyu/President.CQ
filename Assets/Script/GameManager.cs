@@ -71,10 +71,7 @@ public class GameManager : MonoBehaviour
         }
         user = GameObject.Find("Me").GetComponent<User>();
         init();
-        foreach (User u in userList)
-        {
-            u.printCardList();
-        }
+
 
         start_button.onClick.AddListener(() =>
         {
@@ -256,8 +253,8 @@ public class GameManager : MonoBehaviour
         temp.gameObject.GetComponent<RectTransform>().SetPositionAndRotation(new Vector3(deckPoint.position.x +  (submittedCard.Count-1) * 30, deckPoint.position.y, 0), Quaternion.identity);
         temp.GetComponent<RectTransform>().SetParent(deck.GetComponent<RectTransform>());
         temp.name = submittedCard[submittedCard.Count-1];
-        temp.GetComponentInChildren<Card>().CardCode = submittedCard[submittedCard.Count-1];
-        temp.GetComponentInChildren<Card>().setCardImg();
+        temp.GetComponent<Card>().CardCode = submittedCard[submittedCard.Count-1];
+        temp.GetComponent<Card>().setCardImg();
 
     }
     [PunRPC]
@@ -268,8 +265,8 @@ public class GameManager : MonoBehaviour
         temp.gameObject.GetComponent<RectTransform>().SetPositionAndRotation(new Vector3(rect.position.x + (count - 1) * 30, rect.position.y, 0), Quaternion.identity);
         temp.GetComponent<RectTransform>().SetParent(deck.GetComponent<RectTransform>());
         temp.name = list[count - 1];
-        temp.GetComponentInChildren<Card>().CardCode = list[count - 1];
-        temp.GetComponentInChildren<Card>().setCardImg();
+        temp.GetComponent<Card>().CardCode = list[count - 1];
+        temp.GetComponent<Card>().setCardImg();
     }
 
     /*---------------------------------------------------------------------------------------*/
@@ -280,7 +277,7 @@ public class GameManager : MonoBehaviour
     public void RoundStart()
     {
         //새로운 라운드 시작
-        userList[0].SpreadCard(); // 나의 덱에 카드를 뿌리고
+        user.SpreadCard(); // 나의 덱에 카드를 뿌리고
         if (userList[0].userCard.Contains("D01")) {
             pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
         }
