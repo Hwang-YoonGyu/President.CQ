@@ -43,7 +43,7 @@ public abstract class User : MonoBehaviour
             for (int i = 0; i < cardObjList.Count; i++)
             {
                 Debug.Log("돌았다!");
-                cardObjList[i].transform.Find("Card").gameObject.GetComponent<Image>().color = new Color(52 / 255f, 52 / 255f, 52 / 255f, 255 / 255f);
+                cardObjList[i].GetComponent<Image>().color = new Color(52 / 255f, 52 / 255f, 52 / 255f, 255 / 255f);
             }
         }
 
@@ -54,7 +54,7 @@ public abstract class User : MonoBehaviour
 
                 if (!submitCard(lastValue, cardObjList[i].GetComponent<Card>().CardCode))
                 {
-                    cardObjList[i].transform.Find("Card").gameObject.GetComponent<Image>().color = new Color(100, 100, 100, 255);
+                    cardObjList[i].GetComponent<Image>().color = new Color(100, 100, 100, 255);
 
                 }
             }
