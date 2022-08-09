@@ -203,9 +203,9 @@ public class GameManager : MonoBehaviour
         tempCard.Add(cardcode); //1.1
         if (submittedCard.Count==0)
         {
-            ArrangeCard1(deck, deckPoint, tempCard.Count, tempCard);//1.2
+            ArrangeCard1(deckPoint, tempCard.Count, tempCard);//1.2
         }
-        else ArrangeCard1(deck, deckPoint, submittedCard.Count, submittedCard);//1.2
+        else ArrangeCard1(deckPoint, submittedCard.Count, submittedCard);//1.2
     }
     public void Submit()
     {
@@ -229,12 +229,34 @@ public class GameManager : MonoBehaviour
     public void Pass()
     {
         //3. 제출 버튼을 누르지 않으면(pass or countdown)
-        //3.1 tempCard는 비워지고
-        //3.2 이동된 카드(tempCard에 있던 카드들 다시 mydeck의 child로 원 위치)
+        //3.1 이동된 카드(tempCard에 있던 카드들 다시 mydeck의 child로 원 위치)
+        //3.2 tempCard는 비워지고
         //3.3 nextTurn
 
-        tempCard.Clear();//3.1
-        ArrangeCard1(myDeck, myDeckPoint, user.userCard.Count, user.userCard);//3.2
+        Transform[] deckChildren = deck.GetComponentsInChildren<Transform>();
+        foreach (Transform child in deckChildren)
+        {
+            if (child.name != deck.name )
+            {
+                if (tempCard.Contains(child.name))
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+        }//덱에 올라와 있는 카드 안낼것이니 지워버리고(temp의 담겨있는 카드들만 골라서 지우기)
+        Transform[] myDeckChildren = myDeck.GetComponentsInChildren<Transform>();
+        foreach (Transform child in myDeckChildren)
+        {
+            if (child.name != myDeck.name)
+            {
+                Destroy(child.gameObject);
+            }
+        }//나의덱에 있는 카드 먼저 싹 지워버리고
+        user.SpreadCard();//가지고 있는 카드로 업데이트
+
+        tempCard.Clear();//3.2
+        
+
         stopSwitch = true;
     }
     [PunRPC]
@@ -258,12 +280,12 @@ public class GameManager : MonoBehaviour
 
     }
     [PunRPC]
-    public void ArrangeCard1(GameObject obj, RectTransform rect, int count, List<string> list )// 일단 실험삼아 만들어놓음 나중에 이름 바꿀게
+    public void ArrangeCard1(RectTransform rect, int count, List<string> list )// 일단 실험삼아 만들어놓음 나중에 이름 바꿀게
     {
         GameObject temp = Instantiate(card, rect.position, Quaternion.identity); //재생성
 
         temp.gameObject.GetComponent<RectTransform>().SetPositionAndRotation(new Vector3(rect.position.x + (count - 1) * 30, rect.position.y, 0), Quaternion.identity);
-        temp.GetComponent<RectTransform>().SetParent(obj.GetComponent<RectTransform>());
+        temp.GetComponent<RectTransform>().SetParent(deck.GetComponent<RectTransform>());
         temp.name = list[count - 1];
         temp.GetComponent<Card>().CardCode = list[count - 1];
         temp.GetComponent<Card>().setCardImg();
