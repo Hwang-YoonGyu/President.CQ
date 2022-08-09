@@ -204,8 +204,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(cardcode + "덱에 올림");
         tempCard.Add(cardcode); //1.1
-        //ArrangeCard();
-        ArrangeCard1(deckPoint, submittedCard.Count, submittedCard);//1.2
+        if (submittedCard.Count==0)
+        {
+            ArrangeCard1(deckPoint, tempCard.Count, tempCard);//1.2
+        }
+        else ArrangeCard1(deckPoint, submittedCard.Count, submittedCard);//1.2
     }
     public void Submit()
     {
@@ -221,7 +224,6 @@ public class GameManager : MonoBehaviour
         {
             user.Submit(tempCard[i]);
         }//2.1
-
         SubmittedRPC(tempCard);//2.2, 2.4
         tempCard.Clear();//2.3
 
@@ -292,7 +294,6 @@ public class GameManager : MonoBehaviour
         {
             pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
             ControlSwitch = true;
-            turnText.text = userName;
             userList[0].changeColor(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count - 1]);
         }
         else
@@ -304,7 +305,8 @@ public class GameManager : MonoBehaviour
     [PunRPC] //03
     public void setTurn(string username)
     {
-        currentTurnUser = username;
+        //currentTurnUser = username;
+        turnText.text = username;
         StartCoroutine(CountTime());
     }
 
