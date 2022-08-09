@@ -38,23 +38,25 @@ public abstract class User : MonoBehaviour
 
     public void changeColor(string lastValue)
     {
+        //첫번째 턴일때
         if (lastValue == "no")
         {
             for (int i = 0; i < cardObjList.Count; i++)
             {
                 Debug.Log("돌았다!");
+                //색 바뀌는 테스트! 지워야함
                 cardObjList[i].GetComponent<Image>().color = new Color(52 / 255f, 52 / 255f, 52 / 255f, 255 / 255f);
             }
         }
-
+        //아닐때
         else
         {
             for (int i = 0; i < cardObjList.Count; i++)
             {
-
+                //낼 수 없는 카드면 어둡게
                 if (!submitCard(lastValue, cardObjList[i].GetComponent<Card>().CardCode))
                 {
-                    cardObjList[i].GetComponent<Image>().color = new Color(100, 100, 100, 255);
+                    cardObjList[i].GetComponent<Image>().color = new Color(52 / 255f, 52 / 255f, 52 / 255f, 255 / 255f);
 
                 }
             }
