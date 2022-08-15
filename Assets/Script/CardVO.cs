@@ -233,10 +233,10 @@ public class CardVO : MonoBehaviour
                 gameObject.GetComponent<Image>().sprite = C13;
                 break;
 
-            case "JC":
+            case "JCR":
                 gameObject.GetComponent<Image>().sprite = JC;
                 break;
-            case "JB":
+            case "JBK":
                 gameObject.GetComponent<Image>().sprite = JB;
                 break;
 

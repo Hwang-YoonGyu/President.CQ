@@ -45,7 +45,7 @@ public abstract class User : MonoBehaviour
             {
                 Debug.Log("돌았다!");
                 //색 바뀌는 테스트! 지워야함
-                cardObjList[i].GetComponent<Image>().color = new Color(52 / 255f, 52 / 255f, 52 / 255f, 255 / 255f);
+                //cardObjList[i].GetComponent<Image>().color = new Color(52 / 255f, 52 / 255f, 52 / 255f, 255 / 255f);
             }
         }
         //아닐때
@@ -53,8 +53,17 @@ public abstract class User : MonoBehaviour
         {
             for (int i = 0; i < cardObjList.Count; i++)
             {
+                string temp = "";
                 //낼 수 없는 카드면 어둡게
-                if (!submitCard(lastValue, cardObjList[i].GetComponent<Card>().CardCode))
+                try
+                {
+                    temp = cardObjList[i].GetComponent<Card>().CardCode.Substring(1, 2);
+
+                } catch {
+                    temp = "no";
+                }
+
+                if (temp != "no" && temp != lastValue)
                 {
                     cardObjList[i].GetComponent<Image>().color = new Color(52 / 255f, 52 / 255f, 52 / 255f, 255 / 255f);
 

@@ -13,6 +13,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public GameManager gameManager;
     private bool isSelected;
     private int count = 0;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (gameManager.ControlSwitch)
@@ -55,14 +56,27 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
             if (isInDeck)
             {
-                gameManager.Temp(CardCode);
+                string lastCard;
+                if (gameManager.tempCard.Count == 0)
+                {
+                    lastCard = "no";
+                }
+                else 
+                {
+                    lastCard = gameManager.tempCard[gameManager.tempCard.Count - 1].Substring(1, 2);
+                }
 
-                //user.Submit(CardCode);
 
-                //�ı�
-                Destroy(rect.gameObject);
-                //gameManager.SubmittedRPC(CardCode);
-
+                if (lastCard == "no" || lastCard == "CR" || lastCard == "BK" || lastCard == CardCode.Substring(1, 2))
+                {
+                    gameManager.Temp(CardCode);
+                    
+                    Destroy(rect.gameObject);
+                    user.changeColor(CardCode.Substring(1,2));
+                }
+                else {
+                    rect.position = wasPosition;
+                }
             }
             else
             {

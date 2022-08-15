@@ -157,11 +157,11 @@ public class GameManager : MonoBehaviour
         CardDeck.Add("S12");
         CardDeck.Add("S13");
 
-        CardDeck.Add("JB");
-        CardDeck.Add("JC");
+        CardDeck.Add("JBK");
+        CardDeck.Add("JCR");
     }
     public IEnumerator CountTime() {
-        float time = 15.0f;
+        float time = 1500.0f;
 
         while (true) {
             time -= Time.deltaTime;
