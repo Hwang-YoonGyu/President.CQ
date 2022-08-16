@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIAnimation : MonoBehaviour
 {
@@ -34,9 +35,39 @@ public class UIAnimation : MonoBehaviour
 
 
     }
+
+
+    //밝아짐 
     public static IEnumerator fadeIn(GameObject panel)
     {
-        
+
+        for (float f = 0f; f < 1; f += 0.01f)
+        {
+            Color c = panel.GetComponent<Image>().color;
+            //a == 투명도값 
+            c.a = f;
+            panel.GetComponent<Image>().color = c;
+            yield return null;
+        }
+
+
+    }
+
+    //어두워짐 
+    public static IEnumerable fadeOut(GameObject panel)
+    {
+
+        for (float f = 1f; f > 0; f -= 0.01f)
+        {
+            Color c = panel.GetComponent<Image>().color;
+            c.a = f;
+            panel.GetComponent<Image>().color = c;
+            yield return null;
+        }
+        yield return new WaitForSeconds(1);
+        panel.SetActive(false);
+
+
     }
 
 }

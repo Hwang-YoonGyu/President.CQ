@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 
-public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
+public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public string CardCode = "H13";
     public RectTransform rect;
@@ -22,21 +22,6 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             rect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
 
-    }
-
-    public void OnPointerClick(PointerEventData eventdata)
-    {
-        count++;
-        //올라가라
-        if (count % 2 == 1)
-        {
-            rect.position = rect.position +  new Vector3(0f, 50f, 0f);
-        }
-        //내려가라
-        else
-        {
-            rect.position = rect.position + new Vector3(0f, -50f, 0f);
-        }
     }
 
 
