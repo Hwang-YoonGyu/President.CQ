@@ -34,4 +34,9 @@ public class UIAnimation : MonoBehaviour
 
 
     }
+    public static IEnumerator fadeIn(GameObject panel)
+    {
+        
+    }
+
 }
