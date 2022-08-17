@@ -5,6 +5,7 @@ using System.Collections;
 
 public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    AudioSource audioSource;
     public string CardCode = "H13";
     public RectTransform rect;
     private Vector3 wasPosition;
@@ -13,6 +14,11 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public GameManager gameManager;
     private bool isSelected;
     private int count = 0;
+
+    void Awake()
+    {
+        this.audioSource = GetComponent<AudioSource>();
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -38,7 +44,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if (gameManager.ControlSwitch)
         {
             rect.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
+            
             if (isInDeck)
             {
                 string lastCard;
@@ -67,6 +73,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             {
                 rect.position = wasPosition;
             }
+            GameObject.Find("cardsound").GetComponent<AudioSource>().Play();
         }
     }
 
@@ -99,6 +106,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     private void OnMouseDown()
     {
+        
         gameObject.GetComponent<GameManager>().myDeck.GetComponent<Collider2D>();
         isSelected = true;
     }
