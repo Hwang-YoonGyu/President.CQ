@@ -68,12 +68,12 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 else {
                     rect.position = wasPosition;
                 }
+                GameObject.Find("cardsound").GetComponent<AudioSource>().Play();
             }
             else
             {
                 rect.position = wasPosition;
             }
-            GameObject.Find("cardsound").GetComponent<AudioSource>().Play();
         }
     }
 
