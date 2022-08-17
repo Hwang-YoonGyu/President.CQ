@@ -51,22 +51,18 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 if (gameManager.tempCard.Count == 0)
                 {
                     lastCard = "no";
-                    GameObject.Find("cardsound").GetComponent<AudioSource>().Play();
                 }
                 else 
                 {
                     lastCard = gameManager.tempCard[gameManager.tempCard.Count - 1].Substring(1, 2);
-                    
                 }
-
 
                 if (lastCard == "no" || lastCard == "CR" || lastCard == "BK" || lastCard == CardCode.Substring(1, 2))
                 {
                     gameManager.Temp(CardCode);
-                    
                     Destroy(rect.gameObject);
                     user.changeColor(CardCode.Substring(1,2));
-                    
+                    GameObject.Find("cardsound").GetComponent<AudioSource>().Play();
                 }
                 else {
                     rect.position = wasPosition;
