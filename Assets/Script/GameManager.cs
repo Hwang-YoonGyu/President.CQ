@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
 
 
     public void SubmittedRPC(string cardcode) {
-        pv.RPC("Submitted", RpcTarget.All, cardcode);
+        pv.RPC("Submitted", RpcTarget.Others, cardcode);
     }
     //1. 카드를 내면 (turn인 대상이 카드가 isIndeck)
     //1.1 temp Card에 카드가 추가되고
@@ -265,7 +265,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(cardcode + "카드가 제출됨");
         submittedCard.Add(cardcode);
-        //ArrangeCard1(deckPoint, submittedCard.Count, submittedCard);
+        ArrangeCard1(deckPoint, submittedCard.Count, cardcode);
 
     }
     [PunRPC]
@@ -281,14 +281,14 @@ public class GameManager : MonoBehaviour
 
     }
     [PunRPC]
-    public void ArrangeCard1(RectTransform rect, int count, List<string> list )// 일단 실험삼아 만들어놓음 나중에 이름 바꿀게
+    public void ArrangeCard1(RectTransform rect, int count, string cardcode )// 일단 실험삼아 만들어놓음 나중에 이름 바꿀게
     {
         GameObject temp = Instantiate(card, rect.position, Quaternion.identity); //재생성
 
         temp.gameObject.GetComponent<RectTransform>().SetPositionAndRotation(new Vector3(rect.position.x + (count - 1) * 30, rect.position.y, 0), Quaternion.identity);
         temp.GetComponent<RectTransform>().SetParent(deck.GetComponent<RectTransform>());
-        temp.name = list[count - 1];
-        temp.GetComponent<Card>().CardCode = list[count - 1];
+        temp.name = cardcode;
+        temp.GetComponent<Card>().CardCode = cardcode;
         temp.GetComponent<Card>().setCardImg();
     }
 
