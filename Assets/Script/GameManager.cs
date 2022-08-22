@@ -186,8 +186,8 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void SubmittedRPC(List<string> list) {
-        pv.RPC("Submitted", RpcTarget.All, list);
+    public void SubmittedRPC(string cardcode) {
+        pv.RPC("Submitted", RpcTarget.All, cardcode);
     }
     //1. 카드를 내면 (turn인 대상이 카드가 isIndeck)
     //1.1 temp Card에 카드가 추가되고
@@ -220,8 +220,9 @@ public class GameManager : MonoBehaviour
         for(int i=0; i<tempCard.Count; i++)
         {
             user.Submit(tempCard[i]);
+            SubmittedRPC(tempCard[i]);
         }//2.1
-        SubmittedRPC(tempCard);//2.2, 2.4
+        //2.2, 2.4
         tempCard.Clear();//2.3
 
         stopSwitch = true;  //2.5
@@ -260,10 +261,10 @@ public class GameManager : MonoBehaviour
         stopSwitch = true;
     }
     [PunRPC]
-    public void Submitted(List<string> list)
+    public void Submitted(string cardcode)
     {
-        Debug.Log(list.Count + "개의 카드가 제출됨");
-        submittedCard.AddRange(list);
+        Debug.Log(cardcode + "카드가 제출됨");
+        submittedCard.Add(cardcode);
         //ArrangeCard1(deckPoint, submittedCard.Count, submittedCard);
 
     }
