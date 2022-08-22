@@ -228,6 +228,7 @@ public class GameManager : MonoBehaviour
         tempCard.Clear();//2.3
 
         stopSwitch = true;  //2.5
+        TurnEnd();
     }
     public void Pass()
     {
