@@ -339,10 +339,10 @@ public class GameManager : MonoBehaviour
 
 
     [PunRPC]
-    public void TurnNext()
+    public void TurnNext(string username)
     {
         
-        TurnStart(userList[(index + 1) % 4].Name);
+        TurnStart(username);
     }
     [PunRPC]
     public void TurnEnd()
@@ -353,7 +353,7 @@ public class GameManager : MonoBehaviour
             pv.RPC("setTurn", RpcTarget.All, userList[(index + 1) % 4].Name);
             //need manage sequence of turn method
             StopCoroutine(CountTime());
-            TurnNext();
+            TurnNext(userList[(index + 1) % 4].Name);
         }
     }
 
