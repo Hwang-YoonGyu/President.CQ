@@ -169,7 +169,6 @@ public class GameManager : MonoBehaviour
             time -= Time.deltaTime;
             if (time <= 0.0f || stopSwitch) {
 
-                //TurnEnd();
                 break;
             }
 
@@ -177,7 +176,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         stopSwitch = false;
-        Pass();
     }
 
 
