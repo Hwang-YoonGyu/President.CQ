@@ -221,8 +221,8 @@ public class GameManager : MonoBehaviour
         {
             user.Submit(tempCard[i]);
             SubmittedRPC(tempCard[i]);
-        }//2.1
-        //2.2, 2.4
+        }//2.1, 2.2, 2.4
+
         tempCard.Clear();//2.3
 
         stopSwitch = true;  //2.5
@@ -345,15 +345,15 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void TurnEnd()
     {
-        index = userList.FindIndex(x => x.Name == currentTurnUser);
+        index = userList.FindIndex(x => x.Name == turnText.text);
         if (PhotonNetwork.IsMasterClient)
         {
             //need manage sequence of turn method
             StopCoroutine(CountTime());
-            TurnNext("임수박");
-            pv.RPC("TurnNext", RpcTarget.All, "임수박");
+            pv.RPC("TurnStart", RpcTarget.All, userList[(index+1) % 4].Name);
             //TurnNext(userList[(index + 1) % 4].Name);
-            Debug.Log("다음차례는ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ"+ userList[(index + 1) % 4].Name);
+            Debug.Log("다음차례는 " + userList[(index + 1) % 4].Name);
+            
         }
     }
 
