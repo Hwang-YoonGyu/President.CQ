@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     public string currentTurnTime = "";
     public string currentDirection = "";
     public int cot = 0; //count of turn
+    int index;
+    
     private void init()
     {
         int i = 1;
@@ -339,17 +341,16 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void TurnNext()
     {
-        int index;
-        index = userList.FindIndex(x => x.Name == currentTurnUser);
+        
         TurnStart(userList[(index + 1) % 4].Name);
     }
     [PunRPC]
-    public void TurnEnd(string userName)
+    public void TurnEnd()
     {
-        if (userName == PhotonNetwork.NickName)
+        index = userList.FindIndex(x => x.Name == currentTurnUser);
+        if (PhotonNetwork.IsMasterClient)
         {
-            ControlSwitch = false;
-            pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
+            pv.RPC("setTurn", RpcTarget.All, userList[(index + 1) % 4].Name);
             //need manage sequence of turn method
             StopCoroutine(CountTime());
             TurnNext();
