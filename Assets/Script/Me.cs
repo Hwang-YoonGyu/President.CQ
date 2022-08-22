@@ -25,7 +25,7 @@ public class Me : User
         int i = 0;
         foreach (string s in userCard) {
 
-            GameObject temp = Instantiate(card, new Vector3(550 + (i*95),200,0), Quaternion.identity);
+            GameObject temp = Instantiate(card, new Vector3(500 + (i*95),200,0), Quaternion.identity);
             StartCoroutine(UIAnimation.fadeIn(temp));
             temp.GetComponent<RectTransform>().SetParent(myDeck.GetComponent<RectTransform>());
             temp.name = s;
