@@ -321,7 +321,6 @@ public class GameManager : MonoBehaviour
         {
             pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
             ControlSwitch = true;
-            user.changeColor(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count - 1]);
         }
         else
         {
@@ -351,7 +350,6 @@ public class GameManager : MonoBehaviour
         index = userList.FindIndex(x => x.Name == currentTurnUser);
         if (PhotonNetwork.IsMasterClient)
         {
-            pv.RPC("setTurn", RpcTarget.All, userList[(index + 1) % 4].Name);
             //need manage sequence of turn method
             StopCoroutine(CountTime());
             TurnNext(userList[(index + 1) % 4].Name);
