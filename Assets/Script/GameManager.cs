@@ -203,9 +203,9 @@ public class GameManager : MonoBehaviour
         tempCard.Add(cardcode); //1.1
         if (submittedCard.Count==0)
         {
-            ArrangeCard1(deckPoint, tempCard.Count, tempCard);//1.2
+            ArrangeCard1(deckPoint, tempCard.Count, cardcode);//1.2
         }
-        else ArrangeCard1(deckPoint, submittedCard.Count, submittedCard);//1.2
+        else ArrangeCard1(deckPoint, submittedCard.Count, cardcode);//1.2
     }
     public void Submit()
     {
