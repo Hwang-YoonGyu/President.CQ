@@ -70,4 +70,9 @@ public class UIAnimation : MonoBehaviour
 
     }
 
+    //카드이동 
+    //public static IEnumerable moveCard(Vector3 StartPosition, Vector3 EndPosition)
+    //{
+    //    StartPosition = trans 
+    //}
 }
