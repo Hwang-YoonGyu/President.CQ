@@ -350,7 +350,10 @@ public class GameManager : MonoBehaviour
         {
             //need manage sequence of turn method
             StopCoroutine(CountTime());
-            TurnNext(userList[(index + 1) % 4].Name);
+            TurnNext("임수박");
+            pv.RPC("TurnNext", RpcTarget.All, "임수박");
+            //TurnNext(userList[(index + 1) % 4].Name);
+            Debug.Log("다음차례는ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ"+ userList[(index + 1) % 4].Name);
         }
     }
 
