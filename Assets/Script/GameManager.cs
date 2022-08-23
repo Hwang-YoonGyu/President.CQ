@@ -185,10 +185,6 @@ public class GameManager : MonoBehaviour
     /*---------------------------------------------------------------------------------------*/
 
 
-
-    public void SubmittedRPC(string cardcode) {
-        pv.RPC("Submitted", RpcTarget.Others, cardcode);
-    }
     //1. 카드를 내면 (turn인 대상이 카드가 isIndeck)
     //1.1 temp Card에 카드가 추가되고
     //1.2 낸카드 정렬(deck)
@@ -220,7 +216,7 @@ public class GameManager : MonoBehaviour
         for(int i=0; i<tempCard.Count; i++)
         {
             user.Submit(tempCard[i]);
-            SubmittedRPC(tempCard[i]);
+            pv.RPC("Submitted", RpcTarget.All, tempCard[i]);
         }//2.1, 2.2, 2.4
 
         tempCard.Clear();//2.3
@@ -350,9 +346,9 @@ public class GameManager : MonoBehaviour
         {
             //need manage sequence of turn method
             StopCoroutine(CountTime());
-            pv.RPC("TurnStart", RpcTarget.All, userList[(index+1) % 4].Name);
+            pv.RPC("TurnStart", RpcTarget.All, userList[(index++) % 4].Name);
             //TurnNext(userList[(index + 1) % 4].Name);
-            Debug.Log("다음차례는 " + userList[(index + 1) % 4].Name);
+            Debug.Log("다음차례는 " + userList[(index ++) % 4].Name);
             
         }
     }
