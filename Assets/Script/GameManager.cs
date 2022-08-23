@@ -298,6 +298,7 @@ public class GameManager : MonoBehaviour
         temp.name = cardcode;
         temp.GetComponent<Card>().CardCode = cardcode;
         temp.GetComponent<Card>().setCardImg();
+        count++;
 
     }
 
