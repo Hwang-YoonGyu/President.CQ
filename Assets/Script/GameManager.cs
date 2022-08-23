@@ -200,6 +200,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(cardcode + "덱에 올림");
         tempCard.Add(cardcode); //1.1
+        user.userCard.Remove(cardcode);
         if (submittedCard.Count==0)
         {
             ArrangeCard1(deckPoint, cardcode);//1.2
@@ -218,7 +219,7 @@ public class GameManager : MonoBehaviour
 
         for(int i=0; i<tempCard.Count; i++)
         {
-            user.Submit(tempCard[i]);
+            
             pv.RPC("Submitted", RpcTarget.All, tempCard[i], PhotonNetwork.NickName);
         }//2.1, 2.2, 2.4
 
@@ -291,7 +292,11 @@ public class GameManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }//나의덱에 있는 카드 먼저 싹 지워버리고
+
+        tempCard.Remove(cardcode);
+        user.userCard.Add(cardcode);
         user.SpreadCard();
+        count--;
 
     }
     [PunRPC]

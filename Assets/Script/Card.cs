@@ -91,7 +91,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {
             isInSubmitDeck = true;
         }
-        if(collision.gameObject.name =="myDeck")
+        if(collision.gameObject.name =="MyDeck")
         {
             isInMyDeck =true;
         }
@@ -102,7 +102,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {
             isInSubmitDeck = false;
         }
-        if (collision.gameObject.name == "myDeck")
+        if (collision.gameObject.name == "MyDeck")
         {
             isInMyDeck = false;
         }
