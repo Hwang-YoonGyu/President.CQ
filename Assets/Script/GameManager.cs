@@ -41,7 +41,10 @@ public class GameManager : MonoBehaviour
     public string currentDirection = "";
     public int cot = 0; //count of turn
     int index;
-    
+
+    int count;
+
+
     private void init()
     {
         int i = 1;
@@ -199,9 +202,9 @@ public class GameManager : MonoBehaviour
         tempCard.Add(cardcode); //1.1
         if (submittedCard.Count==0)
         {
-            ArrangeCard1(deckPoint, tempCard.Count, cardcode);//1.2
+            ArrangeCard1(deckPoint, cardcode);//1.2
         }
-        else ArrangeCard1(deckPoint, submittedCard.Count, cardcode);//1.2
+        else ArrangeCard1(deckPoint, cardcode);//1.2
     }
     public void Submit()
     {
@@ -270,7 +273,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(cardcode + "카드가 제출됨");
         submittedCard.Add(cardcode);
-        ArrangeCard1(deckPoint, submittedCard.Count, cardcode);
+        ArrangeCard1(deckPoint, cardcode);
 
     }
     [PunRPC]
@@ -286,7 +289,7 @@ public class GameManager : MonoBehaviour
 
     }
     [PunRPC]
-    public void ArrangeCard1(RectTransform rect, int count, string cardcode )// 일단 실험삼아 만들어놓음 나중에 이름 바꿀게
+    public void ArrangeCard1(RectTransform rect, string cardcode )// 일단 실험삼아 만들어놓음 나중에 이름 바꿀게
     {
         GameObject temp = Instantiate(card, rect.position, Quaternion.identity); //재생성
 
@@ -295,6 +298,7 @@ public class GameManager : MonoBehaviour
         temp.name = cardcode;
         temp.GetComponent<Card>().CardCode = cardcode;
         temp.GetComponent<Card>().setCardImg();
+
     }
 
     /*---------------------------------------------------------------------------------------*/
@@ -323,6 +327,7 @@ public class GameManager : MonoBehaviour
         {
             ControlSwitch = true;
             pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
+            user.changeColor(submittedCard[submittedCard.Count-1]);
             
         }
         else
