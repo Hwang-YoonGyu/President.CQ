@@ -321,8 +321,9 @@ public class GameManager : MonoBehaviour
     {
         if (userName == PhotonNetwork.NickName)
         {
-            pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
             ControlSwitch = true;
+            pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
+            
         }
         else
         {
