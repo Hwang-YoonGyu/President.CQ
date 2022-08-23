@@ -268,6 +268,32 @@ public class GameManager : MonoBehaviour
 
         stopSwitch = true;
     }
+    public void RemoveCardRPC(string cardcode)
+    {
+        pv.RPC("RemoveCard", RpcTarget.All, cardcode);
+    }
+    [PunRPC]
+    public void RemoveCard(string cardcode)
+    {
+        Transform[] DeckChildren = deck.GetComponentsInChildren<Transform>();
+        foreach (Transform child in DeckChildren)
+        {
+            if (child.name == cardcode)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        Transform[] myDeckChildren = myDeck.GetComponentsInChildren<Transform>();
+        foreach (Transform child in myDeckChildren)
+        {
+            if (child.name != myDeck.name)
+            {
+                Destroy(child.gameObject);
+            }
+        }//나의덱에 있는 카드 먼저 싹 지워버리고
+        user.SpreadCard();
+
+    }
     [PunRPC]
     public void Submitted(string cardcode, string name)
     {

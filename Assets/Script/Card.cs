@@ -9,7 +9,8 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public string CardCode = "H13";
     public RectTransform rect;
     private Vector3 wasPosition;
-    private bool isInDeck;
+    private bool isInSubmitDeck;
+    private bool isInMyDeck;
     public User user;
     public GameManager gameManager;
     private bool isSelected;
@@ -45,7 +46,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {
             rect.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             
-            if (isInDeck)
+            if (isInSubmitDeck)
             {
                 string lastCard;
                 if (gameManager.tempCard.Count == 0)
@@ -68,6 +69,12 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                     rect.position = wasPosition;
                 }
             }
+            else if(isInMyDeck)
+            {
+                gameManager.RemoveCardRPC(CardCode);
+
+
+            }
             else
             {
                 rect.position = wasPosition;
@@ -82,14 +89,22 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
         if (collision.gameObject.name == "SubmitManager")
         {
-            isInDeck = true;
+            isInSubmitDeck = true;
+        }
+        if(collision.gameObject.name =="myDeck")
+        {
+            isInMyDeck =true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.name == "SubmitManager")
         {
-            isInDeck = false;
+            isInSubmitDeck = false;
+        }
+        if (collision.gameObject.name == "myDeck")
+        {
+            isInMyDeck = false;
         }
     }
     private void Start()
