@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
         for(int i=0; i<tempCard.Count; i++)
         {
             user.Submit(tempCard[i]);
-            pv.RPC("Submitted", RpcTarget.All, tempCard[i]);
+            pv.RPC("Submitted", RpcTarget.Others, tempCard[i]);
         }//2.1, 2.2, 2.4
 
         tempCard.Clear();//2.3
@@ -230,7 +230,7 @@ public class GameManager : MonoBehaviour
         }//나의덱에 있는 카드 먼저 싹 지워버리고
         user.SpreadCard();//가지고 있는 카드로 업데이트
         stopSwitch = true;  //2.5
-        TurnEnd();
+        pv.RPC("TurnEnd", RpcTarget.Others);
     }
     public void Pass()
     {
