@@ -220,7 +220,15 @@ public class GameManager : MonoBehaviour
         }//2.1, 2.2, 2.4
 
         tempCard.Clear();//2.3
-
+        Transform[] myDeckChildren = myDeck.GetComponentsInChildren<Transform>();
+        foreach (Transform child in myDeckChildren)
+        {
+            if (child.name != myDeck.name)
+            {
+                Destroy(child.gameObject);
+            }
+        }//나의덱에 있는 카드 먼저 싹 지워버리고
+        user.SpreadCard();//가지고 있는 카드로 업데이트
         stopSwitch = true;  //2.5
         TurnEnd();
     }
@@ -341,14 +349,14 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void TurnEnd()
     {
-        index = userList.FindIndex(x => x.Name == turnText.text);
+        index = userList.FindIndex(x => x.Name == turnText.text)+1;
         if (PhotonNetwork.IsMasterClient)
         {
             //need manage sequence of turn method
             StopCoroutine(CountTime());
-            pv.RPC("TurnStart", RpcTarget.All, userList[(index++) % 4].Name);
+            pv.RPC("TurnStart", RpcTarget.All, userList[(index) % 4].Name);
             //TurnNext(userList[(index + 1) % 4].Name);
-            Debug.Log("다음차례는 " + userList[(index ++) % 4].Name);
+            Debug.Log("다음차례는 " + userList[(index) % 4].Name);
             
         }
     }
