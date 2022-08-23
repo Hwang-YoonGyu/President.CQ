@@ -36,18 +36,26 @@ public class UIAnimation : MonoBehaviour
 
     }
 
+    /*
+     오늘의 팁!
+    - while 로 돌려서 Time.deltaTime으로 해준다 
+    for로 반복문 돌리면 실행환경에따라 결과가 달라질슈이씀 ㅋㅋ 
+     */
 
     //밝아짐 
     public static IEnumerator fadeIn(GameObject panel)
     {
+        float t = 0.0f;
 
-        for (float f = 0f; f < 1; f += 0.01f)
+        while (t <= 0.1f)
         {
+
             Color c = panel.GetComponent<Image>().color;
-            //a == 투명도값 
-            c.a = f;
+            c.a = t;
+            t += Time.deltaTime;
             panel.GetComponent<Image>().color = c;
             yield return null;
+
         }
 
 
@@ -56,23 +64,32 @@ public class UIAnimation : MonoBehaviour
     //어두워짐 
     public static IEnumerable fadeOut(GameObject panel)
     {
-
-        for (float f = 1f; f > 0; f -= 0.01f)
+        float t = 0.1f;
+        while (t >= 0.0f)
         {
             Color c = panel.GetComponent<Image>().color;
-            c.a = f;
+            c.a = t;
+            t -= Time.deltaTime;
             panel.GetComponent<Image>().color = c;
             yield return null;
         }
+
         yield return new WaitForSeconds(1);
         panel.SetActive(false);
 
 
     }
 
-    //카드이동 
-    //public static IEnumerable moveCard(Vector3 StartPosition, Vector3 EndPosition)
-    //{
-    //    StartPosition = trans 
-    //}
+    //카드이동 start end 고정
+    public static IEnumerable moveCard(Vector3 position, Vector3 start ,Vector3 end)
+    {
+        float t = 0.0f;
+
+        while (t <= 0.1f)
+        {
+            position = Vector3.MoveTowards(start,end,t*0.1f);
+            t += Time.deltaTime;
+            yield return null;
+        }
+    }
 }
