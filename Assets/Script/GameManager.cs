@@ -219,7 +219,7 @@ public class GameManager : MonoBehaviour
         for(int i=0; i<tempCard.Count; i++)
         {
             user.Submit(tempCard[i]);
-            pv.RPC("Submitted", RpcTarget.Others, tempCard[i]);
+            pv.RPC("Submitted", RpcTarget.All, tempCard[i], PhotonNetwork.NickName);
         }//2.1, 2.2, 2.4
 
         tempCard.Clear();//2.3
@@ -269,11 +269,18 @@ public class GameManager : MonoBehaviour
         stopSwitch = true;
     }
     [PunRPC]
-    public void Submitted(string cardcode)
+    public void Submitted(string cardcode, string name)
     {
-        Debug.Log(cardcode + "카드가 제출됨");
-        submittedCard.Add(cardcode);
-        ArrangeCard1(deckPoint, cardcode);
+        if (name == PhotonNetwork.NickName)
+        {
+            submittedCard.Add(cardcode);
+        }
+        else
+        {
+            Debug.Log(cardcode + "카드가 제출됨");
+            submittedCard.Add(cardcode);
+            ArrangeCard1(deckPoint, cardcode);
+        }
 
     }
     [PunRPC]
