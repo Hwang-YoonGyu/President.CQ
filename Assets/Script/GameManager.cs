@@ -336,6 +336,17 @@ public class GameManager : MonoBehaviour
         //currentTurnUser = username;
         turnText.text = username;
         StartCoroutine(CountTime());
+        if(ControlSwitch)
+        {
+            submit_button.interactable = true;
+            pass_button.interactable = true;
+        }
+        else
+        {
+            submit_button.interactable = false;
+            pass_button.interactable = false;
+
+        }
     }
 
 
