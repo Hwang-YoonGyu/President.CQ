@@ -230,7 +230,7 @@ public class GameManager : MonoBehaviour
         }//나의덱에 있는 카드 먼저 싹 지워버리고
         user.SpreadCard();//가지고 있는 카드로 업데이트
         stopSwitch = true;  //2.5
-        pv.RPC("TurnEnd", RpcTarget.Others);
+        pv.RPC("TurnEnd", RpcTarget.All);
     }
     public void Pass()
     {
