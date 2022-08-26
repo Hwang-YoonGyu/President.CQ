@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     int index;
 
     int count;
-
+    int lastCardSubmitCount = 0;
 
     private void init()
     {
@@ -217,10 +217,15 @@ public class GameManager : MonoBehaviour
         //2.4 SubmittedCard에 있는 카드들을 deck의 child로 
         //2.5 nextTurn
 
+        if (lastCardSubmitCount > tempCard.Count) {
+            Debug.Log("카드 장수가 너무 적음");
+            return;
+        }
+
         for(int i=0; i<tempCard.Count; i++)
         {
             
-            pv.RPC("Submitted", RpcTarget.All, tempCard[i], PhotonNetwork.NickName);
+            pv.RPC("Submitted", RpcTarget.All, tempCard[i], PhotonNetwork.NickName, tempCard.Count);
         }//2.1, 2.2, 2.4
 
         tempCard.Clear();//2.3
@@ -300,8 +305,10 @@ public class GameManager : MonoBehaviour
 
     }
     [PunRPC]
-    public void Submitted(string cardcode, string name)
+    public void Submitted(string cardcode, string name, int lastCardSubmitCount)
     {
+        this.lastCardSubmitCount = lastCardSubmitCount;
+
         if (name == PhotonNetwork.NickName)
         {
             submittedCard.Add(cardcode);
