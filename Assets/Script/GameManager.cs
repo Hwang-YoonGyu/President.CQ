@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
 
     public Text timeText;
     public Text turnText;
+    public Text directionText;
+    public Text submitLimitText;
+
 
     public PhotonView pv;
     public User user;
@@ -39,11 +42,13 @@ public class GameManager : MonoBehaviour
     public string currentTurnUser = "";
     public string currentTurnTime = "";
     public string currentDirection = "";
+    int lastCardSubmitCount = 0;
+
+
     public int cot = 0; //count of turn
     int index;
 
     int count;
-    int lastCardSubmitCount = 0;
 
     private void init()
     {
@@ -203,9 +208,9 @@ public class GameManager : MonoBehaviour
         user.userCard.Remove(cardcode);
         if (submittedCard.Count==0)
         {
-            ArrangeCard1(deckPoint, cardcode);//1.2
+            ArrangeCard(deckPoint, cardcode);//1.2
         }
-        else ArrangeCard1(deckPoint, cardcode);//1.2
+        else ArrangeCard(deckPoint, cardcode);//1.2
     }
     public void Submit()
     {
@@ -317,11 +322,16 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(cardcode + "카드가 제출됨");
             submittedCard.Add(cardcode);
-            ArrangeCard1(deckPoint, cardcode);
+            ArrangeCard(deckPoint, cardcode);
+            foreach (User u in userList) {
+                if (u.Name == name) {
+                    u.userCard.Remove(cardcode);
+                }
+            }
         }
 
     }
-    [PunRPC]
+/*    [PunRPC]
     public void ArrangeCard()
     {
         GameObject temp = Instantiate(card, deckPoint.position, Quaternion.identity); //재생성
@@ -332,9 +342,9 @@ public class GameManager : MonoBehaviour
         temp.GetComponent<Card>().CardCode = submittedCard[submittedCard.Count-1];
         temp.GetComponent<Card>().setCardImg();
 
-    }
+    }*/
     [PunRPC]
-    public void ArrangeCard1(RectTransform rect, string cardcode )// 일단 실험삼아 만들어놓음 나중에 이름 바꿀게
+    public void ArrangeCard(RectTransform rect, string cardcode )
     {
         GameObject temp = Instantiate(card, rect.position, Quaternion.identity); //재생성
 
@@ -373,7 +383,7 @@ public class GameManager : MonoBehaviour
         {
             ControlSwitch = true;
             pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
-            user.changeColor("no");
+            user.changeColor(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count-1]);
             
         }
         else
