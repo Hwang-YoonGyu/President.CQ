@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     public string currentTurnUser = "";
     public string currentTurnTime = "";
-    public string currentDirection = "";
+    public bool currentDirection = true; // when this value is true, the direction 3 to 2. and false is reverse direction
     int lastCardSubmitCount = 0;
 
 
@@ -226,6 +226,34 @@ public class GameManager : MonoBehaviour
             Debug.Log("카드 장수가 너무 적음");
             return;
         }
+
+        int sameCardCount = 0;
+        string sameCardTemp = null;
+        foreach (string s in submittedCard) {
+            if (null == sameCardTemp || s.Substring(1,2) != sameCardTemp)
+            {
+                sameCardTemp = s.Substring(1, 2);
+            }
+            else if (sameCardTemp == s.Substring(1, 2)) 
+            {
+                sameCardCount++;
+            }     
+        }
+
+        if (sameCardCount >= 4) {
+            Debug.Log("It's Revolution!");
+            if (currentDirection)
+            {
+                currentDirection = false;
+                directionText.text = "2 -> 3";
+            }
+            else
+            {
+                currentDirection = true;
+                directionText.text = "3 -> 2";
+            }
+        }
+
 
         for(int i=0; i<tempCard.Count; i++)
         {
