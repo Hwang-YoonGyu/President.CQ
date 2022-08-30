@@ -369,6 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userCard: []
   cardObjList: []
+  gm: {fileID: 2128010562}
   nameText: {fileID: 823854581}
   myDeck: {fileID: 2014792742}
   card: {fileID: 80280848068272022, guid: a43db947dc8164af48be0965167909b6, type: 3}
@@ -466,6 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userCard: []
   cardObjList: []
+  gm: {fileID: 2128010562}
   nameText: {fileID: 1315246254}
   currentCards: {fileID: 426703417}
 --- !u!1 &380481590
@@ -3757,6 +3759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userCard: []
   cardObjList: []
+  gm: {fileID: 2128010562}
   nameText: {fileID: 1422196656}
   currentCards: {fileID: 965200630}
 --- !u!1 &2008338120
@@ -4058,6 +4061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userCard: []
   cardObjList: []
+  gm: {fileID: 2128010562}
   nameText: {fileID: 2008338121}
   currentCards: {fileID: 1427943792}
 --- !u!1 &2037248287

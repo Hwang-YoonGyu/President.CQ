@@ -16,11 +16,6 @@ public abstract class User : MonoBehaviour
     public abstract void SetName();
     public abstract void SpreadCard();
 
-    private void Start()
-    {
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-    }
 
 
     public bool submitCard(string lastValue, string cardcode)
