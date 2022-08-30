@@ -57,20 +57,19 @@ public abstract class User : MonoBehaviour
             {
                 string temp = "";
                 //낼 수 없는 카드면 어둡게
-                try
-                {
-                    temp = cardObjList[i].GetComponent<Card>().CardCode.Substring(1, 2);
+                //try
+                //{
+                //    temp = cardObjList[i].GetComponent<Card>().CardCode.Substring(1, 2);
 
-                } catch {
-                    temp = "no";
-                }
+                //} catch {
+                //    temp = "no";
+                //}
+
+                temp = cardObjList[i].GetComponent<Card>().CardCode.Substring(1, 2);
 
 
                 if (gm.tempCard.Count == 0)
                 {
-
-
-
                     if (gm.currentDirection)
                     {
                         if (temp != "no" && temp.CompareTo(lastValue) < 0)
@@ -95,11 +94,7 @@ public abstract class User : MonoBehaviour
                         cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
                     }
-
                 }
-
-
-                
             }
         }
     }
