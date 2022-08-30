@@ -65,21 +65,37 @@ public abstract class User : MonoBehaviour
                     temp = "no";
                 }
 
-                if (gm.currentDirection)
-                {
-                    if (temp != "no" && temp.CompareTo(lastValue) > 0)
-                    {
-                        cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
+                if (gm.tempCard.Count == 0)
+                {
+
+
+
+                    if (gm.currentDirection)
+                    {
+                        if (temp != "no" && temp.CompareTo(lastValue) < 0)
+                        {
+                            cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
+
+                        }
+                    }
+                    else
+                    {
+                        if (temp != "no" && temp.CompareTo(lastValue) > 0)
+                        {
+                            cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
+
+                        }
                     }
                 }
                 else
                 {
-                    if (temp != "no" && temp.CompareTo(lastValue) < 0)
+                    if (temp != "no" && temp.CompareTo(lastValue) != 0)
                     {
                         cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
                     }
+
                 }
 
 
