@@ -71,7 +71,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             }
             else if(isInMyDeck)
             {
-                gameManager.RemoveCardRPC(CardCode);
+                gameManager.RemoveCard(CardCode);
 
 
             }
