@@ -8,12 +8,19 @@ public abstract class User : MonoBehaviour
     public List<string> userCard = new List<string>();
     public abstract string Name { get; set; }
     public List<GameObject> cardObjList = new List<GameObject>();
+    public GameManager gm;
 
     public abstract void Submit(string cardcode);
     public abstract void Pass();
 
     public abstract void SetName();
     public abstract void SpreadCard();
+
+    private void Start()
+    {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+    }
 
 
     public bool submitCard(string lastValue, string cardcode)
@@ -63,11 +70,25 @@ public abstract class User : MonoBehaviour
                     temp = "no";
                 }
 
-                if (temp != "no" && temp != lastValue)
+                if (gm.currentDirection)
                 {
-                    cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
+                    if (temp != "no" && temp.CompareTo(lastValue) > 0)
+                    {
+                        cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
+                    }
                 }
+                else
+                {
+                    if (temp != "no" && temp.CompareTo(lastValue) < 0)
+                    {
+                        cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
+
+                    }
+                }
+
+
+                
             }
         }
     }
