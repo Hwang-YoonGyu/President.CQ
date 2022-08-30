@@ -26,12 +26,13 @@ public class Me : User
         foreach (string s in userCard) {
 
             GameObject temp = Instantiate(card, new Vector3(500 + (i*95),200,0), Quaternion.identity);
-            StartCoroutine(UIAnimation.fadeIn(temp));
             temp.GetComponent<RectTransform>().SetParent(myDeck.GetComponent<RectTransform>());
             temp.name = s;
             temp.GetComponent<Card>().CardCode = s;
             temp.GetComponent<Card>().setCardImg();
             i++;
+            StartCoroutine(UIAnimation.fadeIn(temp));
+
             cardObjList.Add(temp);
         }
     }
