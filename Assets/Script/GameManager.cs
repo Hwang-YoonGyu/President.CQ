@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
             {
                 sameCardTemp = s.Substring(1, 2);
             }
-            else if (sameCardTemp == s.Substring(1, 2)) 
+            else if (sameCardTemp == s.Substring(1, 2) || s.Substring(1, 2) == "CR" || s.Substring(1, 2) == "BR") 
             {
                 sameCardCount++;
             }     

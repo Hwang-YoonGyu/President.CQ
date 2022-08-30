@@ -65,7 +65,7 @@ public abstract class User : MonoBehaviour
 
                 if (temp != "no" && temp != lastValue)
                 {
-                    cardObjList[i].GetComponent<Image>().color = new Color(52 / 255f, 52 / 255f, 52 / 255f, 255 / 255f);
+                    cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
                 }
             }
