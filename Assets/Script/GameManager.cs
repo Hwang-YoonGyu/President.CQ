@@ -303,7 +303,7 @@ public class GameManager : MonoBehaviour
         user.SpreadCard();//가지고 있는 카드로 업데이트
 
         tempCard.Clear();//3.2
-        
+        pv.RPC("TurnEnd", RpcTarget.All);
 
         stopSwitch = true;
     }
