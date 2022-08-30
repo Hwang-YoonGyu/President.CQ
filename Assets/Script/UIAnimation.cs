@@ -47,7 +47,7 @@ public class UIAnimation : MonoBehaviour
     {
         float t = 0.0f;
 
-        while (t <= 0.1f)
+        while (t <= 255f)
         {
 
             Color c = panel.GetComponent<Image>().color;
@@ -64,7 +64,7 @@ public class UIAnimation : MonoBehaviour
     //어두워짐 
     public static IEnumerable fadeOut(GameObject panel)
     {
-        float t = 0.1f;
+        float t = 255f;
         while (t >= 0.0f)
         {
             Color c = panel.GetComponent<Image>().color;
