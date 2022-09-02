@@ -222,8 +222,8 @@ public class GameManager : MonoBehaviour
         //2.4 SubmittedCard에 있는 카드들을 deck의 child로 
         //2.5 nextTurn
 
-        if (lastCardSubmitCount > tempCard.Count) {
-            Debug.Log("카드 장수가 너무 적음");
+        if (lastCardSubmitCount != tempCard.Count) {
+            Debug.Log("Card count not match");
             return;
         }
 
