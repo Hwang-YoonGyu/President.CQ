@@ -15,7 +15,7 @@ public abstract class User : MonoBehaviour
 
     public abstract void SetName();
     public abstract void SpreadCard();
-
+    public int rank = 3;
 
 
     public bool submitCard(string lastValue, string cardcode)

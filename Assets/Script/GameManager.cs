@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     int count;
 
+    Dictionary<string, int> ranking;
+
     private void init()
     {
         int i = 1;
@@ -467,6 +469,15 @@ public class GameManager : MonoBehaviour
     public void RoundEnd()
     {
         submittedCard.Clear();// 제출된 카드 리스트 clear
+        //호스트만 돌아용~
+        if (PhotonNetwork.MasterClient.NickName==PhotonNetwork.NickName) {
+            for (int i = 0; i < userList.Count; i++)
+            {
+
+                ranking.Add(userList[i].name, userList[i].userCard.Count);
+            }
+        }
+
 
         for (int i = 0; i < userList.Count; i++)
         {
