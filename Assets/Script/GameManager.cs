@@ -501,14 +501,15 @@ public class GameManager : MonoBehaviour
     {
         submittedCard.Clear();// 제출된 카드 리스트 clear
         //호스트만 돌아용~
-        if (PhotonNetwork.MasterClient.NickName==PhotonNetwork.NickName) {
+        if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
+        {
             for (int i = 0; i < userList.Count; i++)
             {
 
                 ranking.Add(userList[i].name, userList[i].userCard.Count);
             }
+            checkRanking(ranking);
         }
-
 
         for (int i = 0; i < userList.Count; i++)
         {
@@ -543,13 +544,33 @@ public class GameManager : MonoBehaviour
     /*---------------------------------------------------------------------------------------*/
     /*---------------------------------------------------------------------------------------*/
 
-    public void checkRanking()
+
+
+    public void checkRanking(Dictionary<string, int> rankList)
     {
+
+
+
+        for (int i = 0; i < userList.Count; i++)
+        {
+            for (int j = 0; j < userList.Count; j++)
+            {
+                if (userList[i].userCard.Count > userList[j].userCard.Count)
+                {
+                    userList[i].rank++;
+                }
+                else if ((userList[i].userCard.Count == userList[j].userCard.Count) && (userList[i].Name != userList[j].Name))
+                {
+                    //내가아닌 동점자 발생시 
+                }
+            }
+        }
+
 
     }
 
 
-    public void chageCard()
+    public void changeCard()
     {
 
 
