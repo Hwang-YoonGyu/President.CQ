@@ -411,7 +411,7 @@ public class GameManager : MonoBehaviour
         {
             ControlSwitch = true;
             pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
-            user.changeColor((submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count-1]).Substring(1, 2));
+            user.changeColor(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count-1].Substring(1, 2));
             Debug.Log(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count - 1]);
         }
         else
