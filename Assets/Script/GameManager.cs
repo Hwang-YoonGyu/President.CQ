@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     int count;
 
-    Dictionary<string, int> ranking;
+    Dictionary<string, int> ranking = new Dictionary<string, int>();
 
     private void init()
     {
