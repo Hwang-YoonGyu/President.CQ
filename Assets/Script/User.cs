@@ -17,6 +17,24 @@ public abstract class User : MonoBehaviour
     public abstract void SpreadCard();
     public int rank = 3;
 
+    public Sprite rank1;
+    public Sprite rank2;
+    public Sprite rank3;
+    public Sprite rank4;
+
+    public Image face;
+
+    public void setFace() {
+
+        switch (rank) {
+            case 1: face.sprite = rank1; break;
+            case 2: face.sprite = rank2; break;
+            case 3: face.sprite = rank3; break;
+            case 4: face.sprite = rank4; break;
+        }
+        return;
+    }
+
 
     public bool submitCard(string lastValue, string cardcode)
     {
@@ -71,7 +89,7 @@ public abstract class User : MonoBehaviour
                 {
                     if (gm.currentDirection)
                     {
-                        if (temp != "no" && temp.CompareTo(lastValue) > 0)
+                        if ((temp != "no" && temp.CompareTo(lastValue) > 0) || temp != "CR" || temp != "BK")
                         {
                             cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
@@ -79,7 +97,7 @@ public abstract class User : MonoBehaviour
                     }
                     else
                     {
-                        if (temp != "no" && temp.CompareTo(lastValue) < 0)
+                        if ((temp != "no" && temp.CompareTo(lastValue) < 0) || temp != "CR" || temp != "BK")
                         {
                             cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
@@ -88,7 +106,7 @@ public abstract class User : MonoBehaviour
                 }
                 else
                 {
-                    if (temp != "no" && temp.CompareTo(lastValue) != 0)
+                    if (temp != "no" && temp.CompareTo(lastValue) != 0 && temp != "CR" && temp != "BK")
                     {
                         cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
