@@ -50,6 +50,10 @@ public class GameManager : MonoBehaviour
 
     int count;
 
+    int roundCount = 0;
+
+    int passCount = 0;
+
     Dictionary<string, int> ranking = new Dictionary<string, int>();
 
     private void init()
@@ -223,7 +227,7 @@ public class GameManager : MonoBehaviour
         //2.3 tempCard는 비워지고
         //2.4 SubmittedCard에 있는 카드들을 deck의 child로 
         //2.5 nextTurn
-
+        passCount = 0;
         if (lastCardSubmitCount > tempCard.Count) {
             Debug.Log("카드 장수가 너무 적음");
             return;
@@ -291,6 +295,8 @@ public class GameManager : MonoBehaviour
         //3.2 tempCard는 비워지고
         //3.3 nextTurn
 
+        passCount++;
+
         Transform[] deckChildren = deck.GetComponentsInChildren<Transform>();
         foreach (Transform child in deckChildren)
         {
@@ -316,6 +322,21 @@ public class GameManager : MonoBehaviour
         pv.RPC("TurnEnd", RpcTarget.All);
 
         stopSwitch = true;
+
+        if(passCount == 3)
+        {
+            foreach (Transform child in deckChildren)
+            {
+                if (child.name != deck.name)
+                {
+                    
+                    Destroy(child.gameObject);
+                    
+                }
+            }
+            submittedCard.Clear();
+        }
+        
     }
     public void RemoveCardRPC(string cardcode)
     {
@@ -403,6 +424,8 @@ public class GameManager : MonoBehaviour
     public void RoundStart()
     {
         //새로운 라운드 시작
+        roundCount++;
+
         user.SpreadCard(); // 나의 덱에 카드를 뿌리고
         /*if (userList[0].userCard.Contains("D01")) {
             pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
