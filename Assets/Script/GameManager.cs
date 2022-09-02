@@ -229,7 +229,7 @@ public class GameManager : MonoBehaviour
 
         int sameCardCount = 0;
         string sameCardTemp = null;
-        foreach (string s in submittedCard) {
+        foreach (string s in tempCard) {
             if (null == sameCardTemp || s.Substring(1,2) != sameCardTemp)
             {
                 sameCardTemp = s.Substring(1, 2);
