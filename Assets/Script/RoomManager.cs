@@ -45,6 +45,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
             return;
         }
     }
+    public void RoomSetting()
+    {
+        if (SceneManager.GetActiveScene().name == "Room_Scene")
+        {
+            RoomNameText.text = PhotonNetwork.CurrentRoom.Name;
+            pv.RPC("AddAttender", RpcTarget.AllBuffered, PhotonNetwork.NickName);
+
+
+            startBtn.onClick.AddListener(() => {
+                pv.RPC("GameStart", RpcTarget.All);
+            });
+            exitBtn.onClick.AddListener(() => {
+                pv.RPC("RemoveAttender", RpcTarget.All, PhotonNetwork.NickName);
+                PhotonNetwork.LeaveRoom();
+            });
+        }
+    }
     void FixedUpdate()
     {
         if (SceneManager.GetActiveScene().name == "Room_Scene")

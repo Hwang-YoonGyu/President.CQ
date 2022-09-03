@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     public PhotonView pv;
     public User user;
+    public RoomManager rm;
     public bool ControlSwitch = false;// if not my turn, do not controll the card
     public bool stopSwitch = false;// if value is true, timer will stop and pass the trun to other user
 
@@ -51,7 +53,6 @@ public class GameManager : MonoBehaviour
     int count;
 
     int roundCount = 0;
-
     int passCount = 0;
 
     Dictionary<string, int> ranking = new Dictionary<string, int>();
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
             }
         }
         user = GameObject.Find("Me").GetComponent<User>();
+        rm = GameObject.Find("RoomManager").GetComponent<RoomManager>();
         init();
 
 
@@ -176,8 +178,9 @@ public class GameManager : MonoBehaviour
         CardDeck.Add("JBK");
         CardDeck.Add("JCR");
     }
-    public IEnumerator CountTime() {
-        float time = 1500.0f;
+    public IEnumerator TurnCountTime()
+    {
+        float time = 100f;
 
         while (true) {
             time -= Time.deltaTime;
@@ -190,6 +193,25 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         stopSwitch = false;
+    }
+    public IEnumerator GameOverCountTime()
+    {
+        float time = 5f;
+
+        while (true)
+        {
+            time -= Time.deltaTime;
+            if (time <= 0.0)
+            {
+                Debug.Log("Game Over");
+                SceneManager.LoadScene("Room_Scene");
+                break;
+            }
+
+            
+            yield return null;
+        }
+     
     }
 
 
@@ -204,9 +226,9 @@ public class GameManager : MonoBehaviour
     //1.2 낸카드 정렬(deck)
 
     //2. 제출 버튼 누르면
-    
+
     //3. 제출 버튼을 누르지 않으면(pass or countdown)
-    
+
     public void Temp(string cardcode)
     {
         Debug.Log(cardcode + "덱에 올림");
@@ -296,6 +318,7 @@ public class GameManager : MonoBehaviour
         //3.3 nextTurn
 
         passCount++;
+        Debug.Log("누적 "+ passCount + "= pass");
 
         Transform[] deckChildren = deck.GetComponentsInChildren<Transform>();
         foreach (Transform child in deckChildren)
@@ -335,6 +358,7 @@ public class GameManager : MonoBehaviour
                 }
             }
             submittedCard.Clear();
+            passCount = 0;
         }
         
     }
@@ -342,6 +366,8 @@ public class GameManager : MonoBehaviour
     {
         pv.RPC("RemoveCard", RpcTarget.All, cardcode);
     }
+
+
     [PunRPC]
     public void RemoveCard(string cardcode)
     {
@@ -425,7 +451,7 @@ public class GameManager : MonoBehaviour
     {
         //새로운 라운드 시작
         roundCount++;
-
+        Debug.Log(roundCount + "라운드 시작");
         user.SpreadCard(); // 나의 덱에 카드를 뿌리고
         /*if (userList[0].userCard.Contains("D01")) {
             pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
@@ -458,7 +484,7 @@ public class GameManager : MonoBehaviour
     {
         //currentTurnUser = username;
         turnText.text = username;
-        StartCoroutine(CountTime());
+        StartCoroutine(TurnCountTime());
         if(ControlSwitch)
         {
             submit_button.interactable = true;
@@ -487,7 +513,7 @@ public class GameManager : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             //need manage sequence of turn method
-            StopCoroutine(CountTime());
+            
             pv.RPC("TurnStart", RpcTarget.All, userList[(index) % 4].Name);
             //TurnNext(userList[(index + 1) % 4].Name);
             Debug.Log("다음차례는 " + userList[(index) % 4].Name);
@@ -498,7 +524,13 @@ public class GameManager : MonoBehaviour
 
     [PunRPC]
     public void RoundEnd()
-    {
+    { 
+        if (roundCount == 4)
+        {
+            Debug.Log("5초 후에 Room_Scene으로 이동");
+            StartCoroutine(GameOverCountTime());
+            rm.RoomSetting();
+        }
         submittedCard.Clear();// 제출된 카드 리스트 clear
         //호스트만 돌아용~
         if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
