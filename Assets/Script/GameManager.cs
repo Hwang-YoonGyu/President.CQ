@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -54,6 +55,8 @@ public class GameManager : MonoBehaviour
 
     int roundCount = 0;
     int passCount = 0;
+
+
 
     Dictionary<string, int> ranking = new Dictionary<string, int>();
 
@@ -576,11 +579,19 @@ public class GameManager : MonoBehaviour
     /*---------------------------------------------------------------------------------------*/
     /*---------------------------------------------------------------------------------------*/
 
-
+    
 
     public void checkRanking(Dictionary<string, int> rankList)
     {
 
+        int temp1 = 0;
+        int temp2 = 0;
+
+
+        for(int i = 0; i < userList.Count; i++)
+        {
+            userList[i].rank = 1;
+        }
 
 
         for (int i = 0; i < userList.Count; i++)
@@ -591,9 +602,12 @@ public class GameManager : MonoBehaviour
                 {
                     userList[i].rank++;
                 }
+                //카드수가 같다면 && 내가 아닐때 
                 else if ((userList[i].userCard.Count == userList[j].userCard.Count) && (userList[i].Name != userList[j].Name))
                 {
-                    //내가아닌 동점자 발생시 
+                    //내가아닌 동점자 발생시
+                   //남은 카드 코드의 숫자를 합쳐서 높은카드 더 못낸 사람이 진거임 만약 조커를 가지고있다면 조커가진 사람이 더 불리
+
                 }
             }
         }
