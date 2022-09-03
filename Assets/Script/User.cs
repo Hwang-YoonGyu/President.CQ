@@ -36,25 +36,29 @@ public abstract class User : MonoBehaviour
     }
 
 
-    public bool submitCard(string lastValue, string cardcode)
+    public int sumCardValue() 
     {
-        //D03
+        int sum = 0;
 
-
-        int subCard = int.Parse(lastValue.Substring(1, 1));
-        int myCard = int.Parse(cardcode.Substring(1, 1));
-
-
-        if (myCard > subCard)
-        {
-            return true;
+        foreach (string s in userCard) {
+            if (s == "JBK" || s == "JCR")
+            {
+                sum += 14;
+            }
+            else if (gm.currentDirection)
+            {
+                sum += int.Parse(s.Substring(1, 2));
+            }
+            else 
+            {
+                sum += 14 - int.Parse(s.Substring(1, 2));
+            }
         }
-        else
-        {
-            return false;
-        }
 
+        return sum;
     }
+
+
 
     public void changeColor(string lastValue)
     {
