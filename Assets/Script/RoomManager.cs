@@ -95,6 +95,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     [PunRPC]
     void GameStart() {
+        if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName) {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+
+        }
+
         PhotonNetwork.LoadLevel("Game_Scene");
     }
 
