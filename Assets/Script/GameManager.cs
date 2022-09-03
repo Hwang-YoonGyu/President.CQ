@@ -538,12 +538,8 @@ public class GameManager : MonoBehaviour
         //호스트만 돌아용~
         if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
         {
-            for (int i = 0; i < userList.Count; i++)
-            {
-
-                ranking.Add(userList[i].name, userList[i].userCard.Count);
-            }
-            checkRanking(ranking);
+            
+            checkRanking();
         }
 
         for (int i = 0; i < userList.Count; i++)
@@ -581,9 +577,8 @@ public class GameManager : MonoBehaviour
 
     
 
-    public void checkRanking(Dictionary<string, int> rankList)
+    public void checkRanking()
     {
-
         for(int i = 0; i < userList.Count; i++)
         {
             userList[i].rank = 1;
@@ -613,7 +608,26 @@ public class GameManager : MonoBehaviour
         }
 
 
+        for (int i = 0; i < userList.Count; i++) {
+            pv.RPC("changeRank", RpcTarget.All, userList[i].Name, userList[i].rank);
+        }
+
+
     }
+
+
+    [PunRPC]
+    public void changeRank(string userName, int rank) {
+        foreach (User u in userList) {
+            if (u.Name == userName) {
+                u.rank = rank;
+                break;
+            }
+        }
+        
+    }
+
+
 
 
     public void changeCard()
