@@ -607,6 +607,10 @@ public class GameManager : MonoBehaviour
                 {
                     //내가아닌 동점자 발생시
                    //남은 카드 코드의 숫자를 합쳐서 높은카드 더 못낸 사람이 진거임 만약 조커를 가지고있다면 조커가진 사람이 더 불리
+                    if(userList[i].sumCardValue()>userList[j].sumCardValue())
+                    {
+                        userList[i].rank++;
+                    }
 
                 }
             }
