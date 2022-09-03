@@ -459,6 +459,11 @@ public class GameManager : MonoBehaviour
         /*if (userList[0].userCard.Contains("D01")) {
             pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
         }*/
+
+        foreach (User u in userList) {
+            u.setFace();
+        }
+
         if(PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
         {
             pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
