@@ -584,10 +584,6 @@ public class GameManager : MonoBehaviour
     public void checkRanking(Dictionary<string, int> rankList)
     {
 
-        int temp1 = 0;
-        int temp2 = 0;
-
-
         for(int i = 0; i < userList.Count; i++)
         {
             userList[i].rank = 1;
