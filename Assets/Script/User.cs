@@ -92,7 +92,7 @@ public abstract class User : MonoBehaviour
                 {
                     if (gm.currentDirection)
                     {
-                        if ((temp != "no" && temp.CompareTo(lastValue) > 0) || temp != "CR" || temp != "BK")
+                        if ((temp != "no" && temp.CompareTo(lastValue) > 0) && temp != "CR" && temp != "BK")
                         {
                             cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
@@ -100,7 +100,7 @@ public abstract class User : MonoBehaviour
                     }
                     else
                     {
-                        if ((temp != "no" && temp.CompareTo(lastValue) < 0) || temp != "CR" || temp != "BK")
+                        if ((temp != "no" && temp.CompareTo(lastValue) < 0) && temp != "CR" && temp != "BK")
                         {
                             cardObjList[i].GetComponent<Image>().color = new Color(52f / 255f, 52f / 255f, 52f / 255f, 255f / 255f);
 
