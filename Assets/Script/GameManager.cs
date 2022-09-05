@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
                 attenderList.Add("AI_"+i);
             }
         }
+        Destroy(GameObject.Find("RoomManager"));
         user = GameObject.Find("Me").GetComponent<User>();
         //rm = GameObject.Find("RoomManager").GetComponent<RoomManager>();
         init();
