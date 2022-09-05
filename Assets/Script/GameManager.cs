@@ -2,7 +2,6 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
 public class GameManager : MonoBehaviour
@@ -197,25 +196,25 @@ public class GameManager : MonoBehaviour
         }
         stopSwitch = false;
     }
-    public IEnumerator GameOverCountTime()
-    {
-        float time = 5f;
+    //public IEnumerator GameOverCountTime()
+    //{
+    //    float time = 5f;
 
-        while (true)
-        {
-            time -= Time.deltaTime;
-            if (time <= 0.0)
-            {
-                Debug.Log("Game Over");
-                SceneManager.LoadScene("Room_Scene");
-                break;
-            }
+    //    while (true)
+    //    {
+    //        time -= Time.deltaTime;
+    //        if (time <= 0.0)
+    //        {
+    //            Debug.Log("Game Over");
+    //            SceneManager.LoadScene("Room_Scene");
+    //            break;
+    //        }
 
             
-            yield return null;
-        }
+    //        yield return null;
+    //    }
      
-    }
+    //}
 
 
 
