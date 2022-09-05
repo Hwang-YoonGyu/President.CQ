@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject myDeck;
     public GameObject deck;
     public GameObject card;
+    public GameObject collectMoneyPanel;
 
     public RectTransform deckPoint;
     public RectTransform myDeckPoint;
@@ -646,6 +647,18 @@ public class GameManager : MonoBehaviour
         
     }
 
+
+    public IEnumerator showCollectMoneyPanel() {
+
+        float time = 0.0f;
+        StartCoroutine(UIAnimation.fadeIn(collectMoneyPanel));
+
+        while (time < 3.0f) {
+            
+            yield return null;
+        }
+
+    }
 
 
 
