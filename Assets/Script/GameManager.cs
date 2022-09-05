@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviour
                 attenderList.Add("AI_"+i);
             }
         }
-        Destroy(GameObject.Find("RoomManager"));
         user = GameObject.Find("Me").GetComponent<User>();
         //rm = GameObject.Find("RoomManager").GetComponent<RoomManager>();
         init();
@@ -183,7 +182,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator TurnCountTime()
     {
-        float time = 100f;
+        float time = 1500f;
 
         while (true) {
             time -= Time.deltaTime;
