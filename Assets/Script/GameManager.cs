@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
     public bool ControlSwitch = false;// if not my turn, do not controll the card
     public bool stopSwitch = false;// if value is true, timer will stop and pass the trun to other user
 
-    public string currentTurnUser = "";
     public string currentTurnTime = "";
     public bool currentDirection = true; // when this value is true, the direction 3 to 2. and false is reverse direction
     int lastCardSubmitCount = 0;
@@ -287,8 +286,7 @@ public class GameManager : MonoBehaviour
 
 
         for(int i=0; i<tempCard.Count; i++)
-        {
-            
+        {  
             pv.RPC("Submitted", RpcTarget.All, tempCard[i], PhotonNetwork.NickName, tempCard.Count);
         }//2.1, 2.2, 2.4
 
@@ -310,7 +308,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            pv.RPC("TurnEnd", RpcTarget.All);
+            pv.RPC("TurnEnd", RpcTarget.All, PhotonNetwork.NickName);
         }
     }
     public void Pass()
@@ -345,7 +343,7 @@ public class GameManager : MonoBehaviour
         user.SpreadCard();//가지고 있는 카드로 업데이트
 
         tempCard.Clear();//3.2
-        pv.RPC("TurnEnd", RpcTarget.All);
+        pv.RPC("TurnEnd", RpcTarget.All, PhotonNetwork.NickName);
 
         stopSwitch = true;
 
@@ -485,6 +483,13 @@ public class GameManager : MonoBehaviour
         {
             ControlSwitch = false;
         }
+
+        foreach (User u in userList) {
+            if (u.Name == userName) {
+                u.turnOnLigit();
+                break;
+            }
+        }
     }
 
     [PunRPC] //03
@@ -515,7 +520,7 @@ public class GameManager : MonoBehaviour
         TurnStart(username);
     }
     [PunRPC]
-    public void TurnEnd()
+    public void TurnEnd(string username)
     {
         index = userList.FindIndex(x => x.Name == turnText.text)+1;
         if (PhotonNetwork.IsMasterClient)
@@ -527,6 +532,15 @@ public class GameManager : MonoBehaviour
             Debug.Log("다음차례는 " + userList[(index) % 4].Name);
             
         }
+
+        foreach(User u in userList) {
+            if (u.Name == username)
+            {
+                u.turnOffLigit();
+                break;
+            }
+        }
+
     }
 
 

@@ -35,6 +35,15 @@ public abstract class User : MonoBehaviour
         return;
     }
 
+    public void turnOnLigit() {
+        GetComponent<Image>().color = Color.yellow;
+    }
+
+    public void turnOffLigit()
+    {
+        GetComponent<Image>().color = Color.white;
+    }
+
 
     public int sumCardValue() 
     {
