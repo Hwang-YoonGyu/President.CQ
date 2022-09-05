@@ -548,12 +548,12 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void RoundEnd()
     { 
-        if (roundCount == 4)
-        {
-            Debug.Log("5초 후에 Room_Scene으로 이동");
-            StartCoroutine(GameOverCountTime());
-            rm.RoomSetting();
-        }
+        //if (roundCount == 4)
+        //{
+        //    Debug.Log("5초 후에 Room_Scene으로 이동");
+        //    StartCoroutine(GameOverCountTime());
+        //    rm.RoomSetting();
+        //}
         submittedCard.Clear();// 제출된 카드 리스트 clear
         //호스트만 돌아용~
         if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
