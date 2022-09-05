@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     public PhotonView pv;
     public User user;
-    public RoomManager rm;
+    //public RoomManager rm;
     public bool ControlSwitch = false;// if not my turn, do not controll the card
     public bool stopSwitch = false;// if value is true, timer will stop and pass the trun to other user
 
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             }
         }
         user = GameObject.Find("Me").GetComponent<User>();
-        rm = GameObject.Find("RoomManager").GetComponent<RoomManager>();
+        //rm = GameObject.Find("RoomManager").GetComponent<RoomManager>();
         init();
 
 
