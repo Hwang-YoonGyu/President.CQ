@@ -660,7 +660,40 @@ public class GameManager : MonoBehaviour
         pv.RPC("collectMoney",RpcTarget.All);
     }
 
+    [PunRPC]
+    public void collectMoney()
+    {
+        StartCoroutine(IsAllUserReady());
+    }
 
+    [PunRPC]
+    public void changeGreenFace(string userName) {
+        foreach (User u in userList) {
+            if (u.Name == userName) {
+                u.face.color = Color.green;
+            }
+        }
+
+    }
+
+    public IEnumerator IsAllUserReady() {
+
+        while (true) {
+            int readyUserCount = 0;
+
+            foreach (User u in userList) {
+                if (u.face.color == Color.green) {
+                    readyUserCount++;
+                }
+            }
+
+            if (readyUserCount == 4) {
+                break;
+            }
+
+            yield return null;
+        }
+    }
 
     public void changeCard()
     {
