@@ -61,7 +61,7 @@ public class UIAnimation : MonoBehaviour
     }
 
     //어두워짐 
-    public static IEnumerable fadeOut(GameObject panel)
+    public static IEnumerator fadeOut(GameObject panel)
     {
         float t = 0.1f;
         Color c = panel.GetComponent<Image>().color;
@@ -72,15 +72,13 @@ public class UIAnimation : MonoBehaviour
             panel.GetComponent<Image>().color = c;
             yield return null;
         }
-
-        yield return new WaitForSeconds(1);
         panel.SetActive(false);
 
 
     }
 
     //카드이동 start end 고정
-    public static IEnumerable moveCard(Vector3 position, Vector3 start ,Vector3 end)
+    public static IEnumerator moveCard(Vector3 position, Vector3 start ,Vector3 end)
     {
         float t = 0.0f;
 

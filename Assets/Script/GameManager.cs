@@ -653,10 +653,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(UIAnimation.fadeIn(collectMoneyPanel));
 
         while (time < 3.0f) {
-            
+            time -= Time.deltaTime;
             yield return null;
         }
-
+        StartCoroutine(UIAnimation.fadeOut(collectMoneyPanel));
+        pv.RPC("collectMoney",RpcTarget.All);
     }
 
 
