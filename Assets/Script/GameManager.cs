@@ -320,7 +320,7 @@ public class GameManager : MonoBehaviour
         //3.2 tempCard는 비워지고
         //3.3 nextTurn
 
-        pv.RPC("PassCount", RpcTarget.All, PhotonNetwork.NickName);
+        pv.RPC("PassCount", RpcTarget.All);
 
         Transform[] deckChildren = deck.GetComponentsInChildren<Transform>();
         foreach (Transform child in deckChildren)
