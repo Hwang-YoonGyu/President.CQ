@@ -625,13 +625,9 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
-
         for (int i = 0; i < userList.Count; i++) {
             pv.RPC("changeRank", RpcTarget.All, userList[i].Name, userList[i].rank);
         }
-
-
     }
 
 
@@ -653,7 +649,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(UIAnimation.fadeIn(collectMoneyPanel));
 
         while (time < 3.0f) {
-            time -= Time.deltaTime;
+            time += Time.deltaTime;
             yield return null;
         }
         StartCoroutine(UIAnimation.fadeOut(collectMoneyPanel));
@@ -661,44 +657,37 @@ public class GameManager : MonoBehaviour
     }
 
     [PunRPC]
-    public void collectMoney()
+    public void collectMoneyCoroutine()
     {
-        StartCoroutine(IsAllUserReady());
+        StartCoroutine(collectMoney());
     }
 
-    [PunRPC]
-    public void changeGreenFace(string userName) {
-        foreach (User u in userList) {
-            if (u.Name == userName) {
-                u.face.color = Color.green;
-            }
-        }
+    public IEnumerator collectMoney() {
+        float time = 0.0f;
 
-    }
+        while (time > 15.0f) {
+            time += Time.deltaTime;
 
-    public IEnumerator IsAllUserReady() {
-
-        while (true) {
-            int readyUserCount = 0;
-
-            foreach (User u in userList) {
-                if (u.face.color == Color.green) {
-                    readyUserCount++;
-                }
-            }
-
-            if (readyUserCount == 4) {
-                break;
-            }
-
+            
             yield return null;
         }
-    }
 
-    public void changeCard()
-    {
+        if (user.rank == 1)
+        {
 
+        }
+        else if (user.rank == 2)
+        {
 
+        }
+        else if (user.rank == 3)
+        {
+
+        }
+        else if (user.rank == 4)
+        {
+               
+        }
     }
 
     /*---------------------------------------------------------------------------------------*/
