@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -196,25 +197,26 @@ public class GameManager : MonoBehaviour
         }
         stopSwitch = false;
     }
-    //public IEnumerator GameOverCountTime()
-    //{
-    //    float time = 5f;
 
-    //    while (true)
-    //    {
-    //        time -= Time.deltaTime;
-    //        if (time <= 0.0)
-    //        {
-    //            Debug.Log("Game Over");
-    //            SceneManager.LoadScene("Room_Scene");
-    //            break;
-    //        }
+    public IEnumerator GameOverCountTime()
+    {
+        float time = 5f;
 
-            
-    //        yield return null;
-    //    }
-     
-    //}
+        while (true)
+        {
+            time -= Time.deltaTime;
+            if (time <= 0.0)
+            {
+                Debug.Log("Game Over");
+                SceneManager.LoadScene("Lobby_Scene");
+                break;
+            }
+
+
+            yield return null;
+        }
+
+    }
 
 
 
@@ -318,8 +320,7 @@ public class GameManager : MonoBehaviour
         //3.2 tempCard는 비워지고
         //3.3 nextTurn
 
-        passCount++;
-        Debug.Log("누적 "+ passCount + "= pass");
+        pv.RPC("PassCount", RpcTarget.All, PhotonNetwork.NickName);
 
         Transform[] deckChildren = deck.GetComponentsInChildren<Transform>();
         foreach (Transform child in deckChildren)
@@ -368,6 +369,27 @@ public class GameManager : MonoBehaviour
         pv.RPC("RemoveCard", RpcTarget.All, cardcode);
     }
 
+    [PunRPC]
+    public void PassCount()
+    {
+        passCount++;
+        Debug.Log("누적 " + passCount + "= pass");
+        Transform[] deckChildren = deck.GetComponentsInChildren<Transform>();
+        if (passCount == 3)
+        {
+            foreach (Transform child in deckChildren)
+            {
+                if (child.name != deck.name)
+                {
+
+                    Destroy(child.gameObject);
+
+                }
+            }
+            submittedCard.Clear();
+            passCount = 0;
+        }
+    }
 
     [PunRPC]
     public void RemoveCard(string cardcode)
@@ -417,18 +439,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
-/*    [PunRPC]
-    public void ArrangeCard()
-    {
-        GameObject temp = Instantiate(card, deckPoint.position, Quaternion.identity); //재생성
 
-        temp.gameObject.GetComponent<RectTransform>().SetPositionAndRotation(new Vector3(deckPoint.position.x +  (submittedCard.Count-1) * 30, deckPoint.position.y, 0), Quaternion.identity);
-        temp.GetComponent<RectTransform>().SetParent(deck.GetComponent<RectTransform>());
-        temp.name = submittedCard[submittedCard.Count-1];
-        temp.GetComponent<Card>().CardCode = submittedCard[submittedCard.Count-1];
-        temp.GetComponent<Card>().setCardImg();
-
-    }*/
     [PunRPC]
     public void ArrangeCard(RectTransform rect, string cardcode )
     {
@@ -546,13 +557,13 @@ public class GameManager : MonoBehaviour
 
     [PunRPC]
     public void RoundEnd()
-    { 
-        //if (roundCount == 4)
-        //{
-        //    Debug.Log("5초 후에 Room_Scene으로 이동");
-        //    StartCoroutine(GameOverCountTime());
-        //    rm.RoomSetting();
-        //}
+    {
+        if (roundCount == 4)
+        {
+            Debug.Log("5초 후에 Lobby_Scene으로 이동");
+            StartCoroutine(GameOverCountTime());
+            //rm.RoomSetting();
+        }
         submittedCard.Clear();// 제출된 카드 리스트 clear
         //호스트만 돌아용~
         if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
