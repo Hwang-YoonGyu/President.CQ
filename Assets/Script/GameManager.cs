@@ -656,21 +656,7 @@ public class GameManager : MonoBehaviour
         pv.RPC("collectMoney",RpcTarget.All);
     }
 
-    [PunRPC]
-    public void collectMoneyCoroutine()
-    {
-        StartCoroutine(collectMoney());
-    }
-
-    public IEnumerator collectMoney() {
-        float time = 0.0f;
-
-        while (time > 15.0f) {
-            time += Time.deltaTime;
-
-            
-            yield return null;
-        }
+    public void collectMoney() {
 
         if (user.rank == 1)
         {
