@@ -253,7 +253,7 @@ public class GameManager : MonoBehaviour
         //2.3 tempCard는 비워지고
         //2.4 SubmittedCard에 있는 카드들을 deck의 child로 
         //2.5 nextTurn
-        passCount = 0;
+        
         if (lastCardSubmitCount > tempCard.Count) {
             Debug.Log("카드 장수가 너무 적음");
             return;
@@ -405,6 +405,7 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void Submitted(string cardcode, string name, int lastCardSubmitCount)
     {
+
         this.lastCardSubmitCount = lastCardSubmitCount;
 
         if (name == PhotonNetwork.NickName)
@@ -422,7 +423,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
+        passCount = 0;
     }
 
     [PunRPC]
