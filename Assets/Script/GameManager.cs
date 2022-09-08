@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
         }
         user = GameObject.Find("Me").GetComponent<User>();
         //rm = GameObject.Find("RoomManager").GetComponent<RoomManager>();
+
         init();
 
 
@@ -424,6 +425,7 @@ public class GameManager : MonoBehaviour
             }
         }
         passCount = 0;
+        lastCardSubmitCount = 0;
     }
 
     [PunRPC]
