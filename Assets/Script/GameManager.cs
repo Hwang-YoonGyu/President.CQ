@@ -556,8 +556,7 @@ public class GameManager : MonoBehaviour
         submittedCard.Clear();// 제출된 카드 리스트 clear
         //호스트만 돌아용~
         if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
-        {
-            
+        { 
             checkRanking();
         }
 
@@ -583,8 +582,14 @@ public class GameManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
-        //덱(나의 덱, 게임 덱)에올라와 있는 카드를 쓸어담아서 (오브젝트 파괴)
-        initCardDeck();// 카드 덱에 주워담아 정리해주고
+
+        if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
+        {
+            initCardDeck();
+            giveCardToUser();
+
+        }
+        StartCoroutine(showCollectMoneyPanel());
     }
 
 
