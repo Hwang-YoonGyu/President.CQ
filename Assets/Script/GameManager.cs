@@ -657,7 +657,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void collectMoney() {
-
+        //1등일때
         if (user.rank == 1)
         {
             if (currentDirection)
@@ -714,17 +714,180 @@ public class GameManager : MonoBehaviour
             }
 
         }
+        //2등일때
         else if (user.rank == 2)
         {
+            if (currentDirection)
+            {
+                User receiver;
 
+                foreach (User u in userList)
+                {
+                    if (u.rank == 3)
+                    {
+                        receiver = u;
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            string temp = null;
+
+                            foreach (string card in user.userCard)
+                            {
+                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) < 0)
+                                {
+                                    temp = card;
+                                }
+                            }
+                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                User receiver;
+
+                foreach (User u in userList)
+                {
+                    if (u.rank == 3)
+                    {
+                        receiver = u;
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            string temp = null;
+
+                            foreach (string card in user.userCard)
+                            {
+                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) > 0)
+                                {
+                                    temp = card;
+                                }
+                            }
+                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        }
+                    }
+                }
+            }
         }
+        //3등일때
         else if (user.rank == 3)
         {
+            if (currentDirection)
+            {
+                User receiver;
+
+                foreach (User u in userList)
+                {
+                    if (u.rank == 2)
+                    {
+                        receiver = u;
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            string temp = null;
+
+                            foreach (string card in user.userCard)
+                            {
+                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) > 0)
+                                {
+                                    temp = card;
+                                }
+                            }
+                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                User receiver;
+
+                foreach (User u in userList)
+                {
+                    if (u.rank == 2)
+                    {
+                        receiver = u;
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            string temp = null;
+
+                            foreach (string card in user.userCard)
+                            {
+                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) < 0)
+                                {
+                                    temp = card;
+                                }
+                            }
+                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        }
+                    }
+                }
+            }
 
         }
+        //4등일때
         else if (user.rank == 4)
         {
-               
+            if (currentDirection)
+            {
+                User receiver;
+
+                foreach (User u in userList)
+                {
+                    if (u.rank == 1)
+                    {
+                        receiver = u;
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            string temp = null;
+
+                            foreach (string card in user.userCard)
+                            {
+                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) > 0)
+                                {
+                                    temp = card;
+                                }
+                            }
+                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                User receiver;
+
+                foreach (User u in userList)
+                {
+                    if (u.rank == 1)
+                    {
+                        receiver = u;
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            string temp = null;
+
+                            foreach (string card in user.userCard)
+                            {
+                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) < 0)
+                                {
+                                    temp = card;
+                                }
+                            }
+                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        }
+                    }
+                }
+            }
         }
     }
 
