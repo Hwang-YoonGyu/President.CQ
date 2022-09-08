@@ -660,6 +660,58 @@ public class GameManager : MonoBehaviour
 
         if (user.rank == 1)
         {
+            if (currentDirection)
+            {
+                User receiver;
+
+                foreach (User u in userList) {
+                    if (u.rank == 4) {
+                        receiver = u;
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            string temp = null;
+
+                            foreach (string card in user.userCard)
+                            {
+                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) < 0)
+                                {
+                                    temp = card;
+                                }
+                            }
+                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                User receiver;
+
+                foreach (User u in userList)
+                {
+                    if (u.rank == 4)
+                    {
+                        receiver = u;
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            string temp = null;
+
+                            foreach (string card in user.userCard)
+                            {
+                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) > 0)
+                                {
+                                    temp = card;
+                                }
+                            }
+                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        }
+                    }
+                }
+            }
 
         }
         else if (user.rank == 2)
@@ -689,6 +741,20 @@ public class GameManager : MonoBehaviour
 
     }
 
+    [PunRPC]
+    public void RemoveCard(string userName, string cardCode)
+    {
+        foreach (User u in userList)
+        {
+            if (userName == u.Name)
+            {
+                u.userCard.Remove(cardCode);
+                break;
+            }
+        }
+
+
+    }
     /*---------------------------------------------------------------------------------------*/
     /*---------------------------------------------------------------------------------------*/
     /*---------------------------------------------------------------------------------------*/
