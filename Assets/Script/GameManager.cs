@@ -690,6 +690,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [PunRPC]
+    public void SendCard(string userName, string cardCode)
+    {
+        foreach (User u in userList) {
+            if (userName == u.Name) {
+                u.userCard.Add(cardCode);
+                break;
+            }
+        }
+
+
+    }
+
     /*---------------------------------------------------------------------------------------*/
     /*---------------------------------------------------------------------------------------*/
     /*---------------------------------------------------------------------------------------*/
