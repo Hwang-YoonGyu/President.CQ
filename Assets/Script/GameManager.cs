@@ -347,21 +347,6 @@ public class GameManager : MonoBehaviour
         pv.RPC("TurnEnd", RpcTarget.All, PhotonNetwork.NickName);
 
         stopSwitch = true;
-
-        if(passCount == 3)
-        {
-            foreach (Transform child in deckChildren)
-            {
-                if (child.name != deck.name)
-                {
-                    
-                    Destroy(child.gameObject);
-                    
-                }
-            }
-            submittedCard.Clear();
-            passCount = 0;
-        }
         
     }
     public void RemoveCardRPC(string cardcode)
