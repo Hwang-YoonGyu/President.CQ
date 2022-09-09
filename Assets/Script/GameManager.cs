@@ -267,7 +267,7 @@ public class GameManager : MonoBehaviour
             {
                 sameCardTemp = s.Substring(1, 2);
             }
-            else if (sameCardTemp == s.Substring(1, 2) || s.Substring(1, 2) == "CR" || s.Substring(1, 2) == "BR") 
+            else if (sameCardTemp == s.Substring(1, 2) || s.Substring(1, 2) == "CR" || s.Substring(1, 2) == "BK") 
             {
                 sameCardCount++;
             }     
@@ -374,6 +374,7 @@ public class GameManager : MonoBehaviour
             }
             submittedCard.Clear();
             passCount = 0;
+            index = 0;
         }
     }
 

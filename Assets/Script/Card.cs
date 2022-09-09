@@ -55,7 +55,9 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 }
                 else 
                 {
-                    lastCard = gameManager.tempCard[gameManager.tempCard.Count - 1].Substring(1, 2);
+                    //lastCard = gameManager.tempCard[gameManager.tempCard.Count - 1].Substring(1, 2);
+                    lastCard = gameManager.tempCard[0].Substring(1, 2);
+
                 }
 
                 if (lastCard == "no" || lastCard == "CR" || lastCard == "BK" || lastCard == CardCode.Substring(1, 2))
