@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public string currentTurnTime = "";
     public bool currentDirection = true; // when this value is true, the direction 3 to 2. and false is reverse direction
-    int lastCardSubmitCount = 0;
+    public int lastCardSubmitCount = 0;
 
 
     public int cot = 0; //count of turn
@@ -359,7 +359,7 @@ public class GameManager : MonoBehaviour
     public void PassCount()
     {
         passCount++;
-        Debug.Log("누적 " + passCount + "= pass");
+        Debug.Log("누적 " + passCount + " pass");
         Transform[] deckChildren = deck.GetComponentsInChildren<Transform>();
         if (passCount == 3)
         {
@@ -375,6 +375,7 @@ public class GameManager : MonoBehaviour
             submittedCard.Clear();
             passCount = 0;
             index = 0;
+            lastCardSubmitCount = 0;
         }
     }
 
@@ -426,7 +427,7 @@ public class GameManager : MonoBehaviour
             }
         }
         passCount = 0;
-        lastCardSubmitCount = 0;
+        
     }
 
     [PunRPC]
