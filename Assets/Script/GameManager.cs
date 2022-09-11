@@ -379,6 +379,7 @@ public class GameManager : MonoBehaviour
             lastCardSubmitCount = 0;
             count = 0;
         }
+        submitLimitText.text = lastCardSubmitCount.ToString();
     }
 
     [PunRPC]
@@ -412,7 +413,7 @@ public class GameManager : MonoBehaviour
     {
 
         this.lastCardSubmitCount = lastCardSubmitCount;
-
+        submitLimitText.text = lastCardSubmitCount.ToString();
         if (name == PhotonNetwork.NickName)
         {
             submittedCard.Add(cardcode);
@@ -556,7 +557,18 @@ public class GameManager : MonoBehaviour
             StartCoroutine(GameOverCountTime());
             //rm.RoomSetting();
         }
+
         submittedCard.Clear();// 제출된 카드 리스트 clear
+        //정보 초기화
+        passCount = 0;
+        lastCardSubmitCount = 0;
+        count = 0;
+        currentDirection = true;
+
+        submitLimitText.text = lastCardSubmitCount.ToString();
+        directionText.text = "3 -> 2";
+
+
         //호스트만 돌아용~
         if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
         { 
