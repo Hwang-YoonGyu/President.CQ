@@ -363,6 +363,7 @@ public class GameManager : MonoBehaviour
         Transform[] deckChildren = deck.GetComponentsInChildren<Transform>();
         if (passCount == 3)
         {
+            Debug.Log("누적 3pass => 덱초기화");
             foreach (Transform child in deckChildren)
             {
                 if (child.name != deck.name)
@@ -376,6 +377,7 @@ public class GameManager : MonoBehaviour
             passCount = 0;
             index = 0;
             lastCardSubmitCount = 0;
+            count = 0;
         }
     }
 
