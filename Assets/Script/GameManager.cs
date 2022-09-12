@@ -178,9 +178,6 @@ public class GameManager : MonoBehaviour
         CardDeck.Add("S11");
         CardDeck.Add("S12");
         CardDeck.Add("S13");
-
-        CardDeck.Add("JBK");
-        CardDeck.Add("JCR");
     }
     public IEnumerator TurnCountTime()
     {
