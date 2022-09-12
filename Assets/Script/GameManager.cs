@@ -342,11 +342,12 @@ public class GameManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }//나의덱에 있는 카드 먼저 싹 지워버리고
-        user.SpreadCard();//가지고 있는 카드로 업데이트
+        
         foreach(string cardcode in tempCard)
         {
             user.userCard.Add(cardcode);
         }
+        user.SpreadCard();//가지고 있는 카드로 업데이트
         tempCard.Clear();//3.2
         pv.RPC("TurnEnd", RpcTarget.All, PhotonNetwork.NickName);
 
