@@ -53,7 +53,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 {
                     lastCard = gameManager.submittedCard.Count == 0 ? "no" : gameManager.submittedCard[gameManager.submittedCard.Count - 1].Substring(1,2);
 
-                    if (lastCard == "no" || lastCard == "CR" || lastCard == "BK" || lastCard.CompareTo(CardCode.Substring(1, 2)) < 0)
+                    if (lastCard.CompareTo(CardCode.Substring(1, 2)) <= 0)
                     {
                         gameManager.Temp(CardCode);
                         Destroy(rect.gameObject);
