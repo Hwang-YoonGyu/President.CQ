@@ -47,6 +47,7 @@ public class UIAnimation : MonoBehaviour
     {
         float t = 0.0f;
         Color c = panel.GetComponent<Image>().color;
+        panel.SetActive(true);
 
         while (t <= 0.5f)
         {

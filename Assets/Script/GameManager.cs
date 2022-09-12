@@ -657,6 +657,7 @@ public class GameManager : MonoBehaviour
         foreach (User u in userList) {
             if (u.Name == userName) {
                 u.rank = rank;
+                u.setFace();
                 break;
             }
         }
@@ -710,6 +711,8 @@ public class GameManager : MonoBehaviour
                             }
                             pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
                             pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
+
                         }
                     }
                 }
@@ -737,6 +740,8 @@ public class GameManager : MonoBehaviour
                             }
                             pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
                             pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
+
                         }
                     }
                 }
@@ -769,6 +774,8 @@ public class GameManager : MonoBehaviour
                             }
                             pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
                             pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
+
                         }
                     }
                 }
@@ -796,6 +803,8 @@ public class GameManager : MonoBehaviour
                             }
                             pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
                             pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
+
                         }
                     }
                 }
@@ -827,6 +836,8 @@ public class GameManager : MonoBehaviour
                             }
                             pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
                             pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
+
                         }
                     }
                 }
@@ -854,6 +865,8 @@ public class GameManager : MonoBehaviour
                             }
                             pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
                             pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
+
                         }
                     }
                 }
@@ -886,6 +899,8 @@ public class GameManager : MonoBehaviour
                             }
                             pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
                             pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
+
                         }
                     }
                 }
@@ -913,6 +928,7 @@ public class GameManager : MonoBehaviour
                             }
                             pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
                             pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
                         }
                     }
                 }
