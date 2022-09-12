@@ -238,7 +238,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(cardcode + "덱에 올림");
         tempCard.Add(cardcode); //1.1
-        user.userCard.Remove(cardcode);
+        //user.userCard.Remove(cardcode);
         if (submittedCard.Count==0)
         {
             ArrangeCard(deckPoint, cardcode);//1.2
@@ -375,7 +375,6 @@ public class GameManager : MonoBehaviour
             }
             submittedCard.Clear();
             passCount = 0;
-            index = 0;
             lastCardSubmitCount = 0;
             count = 0;
         }
