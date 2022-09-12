@@ -466,11 +466,17 @@ public class GameManager : MonoBehaviour
             u.setFace();
         }
 
-        if(PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
+        if (roundCount == 1)
         {
-            pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
+            if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
+            {
+                pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
+            }
         }
-
+        else
+        {
+            pv.RPC("TurnStart", RpcTarget.All, userList[0].Name);
+        }
     }
 
     [PunRPC] //02
