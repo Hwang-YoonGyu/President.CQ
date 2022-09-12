@@ -51,12 +51,12 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 string lastCard;
                 if (gameManager.tempCard.Count == 0)
                 {
-                    lastCard = "no";
+                    lastCard = gameManager.submittedCard.Count == 0 ? "no" : gameManager.submittedCard[gameManager.submittedCard.Count - 1].Substring(1,2);
                 }
                 else 
                 {
-                    //lastCard = gameManager.tempCard[gameManager.tempCard.Count - 1].Substring(1, 2);
-                    lastCard = gameManager.tempCard[0].Substring(1, 2);
+                    lastCard = gameManager.tempCard[gameManager.tempCard.Count - 1].Substring(1, 2);
+                    //lastCard = gameManager.tempCard[0].Substring(1, 2);
 
                 }
 
