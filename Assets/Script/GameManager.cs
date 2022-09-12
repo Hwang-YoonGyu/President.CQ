@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
         {
             if (PhotonNetwork.NickName == s) //when start test on PhotonNetwork, it must change PhotonNetwork.Nickname 
             {
-                userList[0].Name = s;
-                userList[0].SetName();
+                user.Name = s;
+                user.SetName();
             }
             else
             {
@@ -576,6 +576,19 @@ public class GameManager : MonoBehaviour
             checkRanking();
         }
 
+        List<User> tempList = new List<User>();
+
+        for (int i = 1; i < 5; i++) {
+            for (int j=0; j < 4; j++) {
+                if (userList[j].rank == i) {
+                    tempList.Add(userList[j]);
+                    break;
+                }
+            }
+        }
+
+        userList = tempList;
+
         for (int i = 0; i < userList.Count; i++)
         {
             userList[i].userCard.Clear();
@@ -673,7 +686,7 @@ public class GameManager : MonoBehaviour
         while (true) {
             if (time > 3.0f) {
                 StartCoroutine(UIAnimation.fadeOut(collectMoneyPanel));
-                pv.RPC("collectMoney", RpcTarget.All);
+                collectMoney();
                 break;
             }
 
@@ -685,7 +698,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    [PunRPC]
     public void collectMoney() {
         //1등일때
         if (user.rank == 1)
@@ -761,22 +773,19 @@ public class GameManager : MonoBehaviour
                     {
                         receiver = u;
 
-                        for (int i = 0; i < 2; i++)
+
+                        string temp = null;
+
+                        foreach (string card in user.userCard)
                         {
-                            string temp = null;
-
-                            foreach (string card in user.userCard)
+                            if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) < 0)
                             {
-                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) < 0)
-                                {
-                                    temp = card;
-                                }
+                                temp = card;
                             }
-                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
-                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
-                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
-
                         }
+                        pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                        pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
                     }
                 }
             }
@@ -790,22 +799,19 @@ public class GameManager : MonoBehaviour
                     {
                         receiver = u;
 
-                        for (int i = 0; i < 2; i++)
+
+                        string temp = null;
+
+                        foreach (string card in user.userCard)
                         {
-                            string temp = null;
-
-                            foreach (string card in user.userCard)
+                            if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) > 0)
                             {
-                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) > 0)
-                                {
-                                    temp = card;
-                                }
+                                temp = card;
                             }
-                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
-                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
-                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
-
                         }
+                        pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                        pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
                     }
                 }
             }
@@ -823,22 +829,19 @@ public class GameManager : MonoBehaviour
                     {
                         receiver = u;
 
-                        for (int i = 0; i < 2; i++)
+                        
+                        string temp = null;
+
+                        foreach (string card in user.userCard)
                         {
-                            string temp = null;
-
-                            foreach (string card in user.userCard)
+                            if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) > 0)
                             {
-                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) > 0)
-                                {
-                                    temp = card;
-                                }
+                                temp = card;
                             }
-                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
-                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
-                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
-
                         }
+                        pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                        pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
                     }
                 }
             }
@@ -852,22 +855,21 @@ public class GameManager : MonoBehaviour
                     {
                         receiver = u;
 
-                        for (int i = 0; i < 2; i++)
+                        
+                        string temp = null;
+
+                        foreach (string card in user.userCard)
                         {
-                            string temp = null;
-
-                            foreach (string card in user.userCard)
+                            if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) < 0)
                             {
-                                if (temp == null || card.Substring(1, 2).CompareTo(temp.Substring(1, 2)) < 0)
-                                {
-                                    temp = card;
-                                }
+                                temp = card;
                             }
-                            pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
-                            pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
-                            Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
-
                         }
+                        pv.RPC("RemoveCard", RpcTarget.All, user.Name, temp);
+                        pv.RPC("SendCard", RpcTarget.All, receiver.Name, temp);
+                        Debug.Log(user.Name + "send " + temp + " to " + receiver.Name);
+
+                        
                     }
                 }
             }
