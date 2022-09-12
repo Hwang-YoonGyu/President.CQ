@@ -22,7 +22,10 @@ public class GameManager : MonoBehaviour
     public GameObject deck;
     public GameObject card;
     public GameObject collectMoneyPanel;
-    public GameObject roundPanel;
+    public GameObject roundStartPanel;
+    public GameObject roundEndPanel;
+    public GameObject GameEndPanel;
+    public GameObject myTurnPanel;
 
     public RectTransform deckPoint;
     public RectTransform myDeckPoint;
@@ -182,12 +185,12 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator TurnCountTime()
     {
-        float time = 1500f;
+        float time = 30.0f;
 
         while (true) {
             time -= Time.deltaTime;
             if (time <= 0.0f || stopSwitch) {
-
+                time = 30.0f;
                 break;
             }
 
@@ -708,18 +711,18 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public IEnumerator showRoundPanel()
+    public IEnumerator showRoundEndPanel()
     {
 
         float time = 0.0f;
-        StartCoroutine(UIAnimation.fadeIn(roundPanel));
+        StartCoroutine(UIAnimation.fadeIn(roundEndPanel));
 
         while (true)
         {
             if (time > 3.0f)
             {
-                StartCoroutine(UIAnimation.fadeOut(roundPanel));
-                if (user.Name == PhotonNetwork.MasterClient.NickName) {
+                StartCoroutine(UIAnimation.fadeOut(roundEndPanel));
+                if (PhotonNetwork.NickName == PhotonNetwork.MasterClient.NickName) {
                     pv.RPC("RoundStart",RpcTarget.All);
                 }
                 break;
@@ -907,7 +910,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            StartCoroutine(showRoundPanel());
+            StartCoroutine(showRoundEndPanel());
 
         }
         //4등일때
