@@ -238,7 +238,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(cardcode + "덱에 올림");
         tempCard.Add(cardcode); //1.1
-        //user.userCard.Remove(cardcode);
+        user.userCard.Remove(cardcode);
         if (submittedCard.Count==0)
         {
             ArrangeCard(deckPoint, cardcode);//1.2
@@ -343,7 +343,10 @@ public class GameManager : MonoBehaviour
             }
         }//나의덱에 있는 카드 먼저 싹 지워버리고
         user.SpreadCard();//가지고 있는 카드로 업데이트
-
+        foreach(string cardcode in tempCard)
+        {
+            user.userCard.Add(cardcode);
+        }
         tempCard.Clear();//3.2
         pv.RPC("TurnEnd", RpcTarget.All, PhotonNetwork.NickName);
 
