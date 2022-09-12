@@ -501,6 +501,7 @@ public class GameManager : MonoBehaviour
     {
         //currentTurnUser = username;
         turnText.text = username;
+        StopCoroutine(TurnCountTime());
         StartCoroutine(TurnCountTime());
         if(ControlSwitch)
         {
