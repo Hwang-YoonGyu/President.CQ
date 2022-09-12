@@ -346,6 +346,7 @@ public class GameManager : MonoBehaviour
             user.userCard.Add(cardcode);
         }
         user.SpreadCard();//가지고 있는 카드로 업데이트
+        count = count - tempCard.Count;
         tempCard.Clear();//3.2
         pv.RPC("TurnEnd", RpcTarget.All, PhotonNetwork.NickName);
 
@@ -476,7 +477,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            pv.RPC("TurnStart", RpcTarget.All, userList[0].Name);
+            if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
+            {
+                pv.RPC("TurnStart", RpcTarget.All, userList[0]);
+            }
         }
     }
 
@@ -715,6 +719,9 @@ public class GameManager : MonoBehaviour
             if (time > 3.0f)
             {
                 StartCoroutine(UIAnimation.fadeOut(roundPanel));
+                if (user.Name == PhotonNetwork.MasterClient.NickName) {
+                    pv.RPC("RoundStart",RpcTarget.All);
+                }
                 break;
             }
 
@@ -900,6 +907,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
+            StartCoroutine(showRoundPanel());
 
         }
         //4등일때
