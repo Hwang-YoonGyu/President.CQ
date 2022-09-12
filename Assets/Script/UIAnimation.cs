@@ -50,9 +50,8 @@ public class UIAnimation : MonoBehaviour
 
         while (t <= 0.1f)
         {
-            c.a = t;
+            c.a = t * 2550f;
             t += Time.deltaTime;
-            panel.GetComponent<Image>().color = c*2550f;
             yield return null;
 
         }
@@ -67,9 +66,8 @@ public class UIAnimation : MonoBehaviour
         Color c = panel.GetComponent<Image>().color;
         while (t >= 0.0f)
         {
-            c.a = t;
+            c.a = t * 2550f;
             t -= Time.deltaTime;
-            panel.GetComponent<Image>().color = c;
             yield return null;
         }
         panel.SetActive(false);

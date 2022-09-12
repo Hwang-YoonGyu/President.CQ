@@ -304,7 +304,7 @@ public class GameManager : MonoBehaviour
         }//나의덱에 있는 카드 먼저 싹 지워버리고
         user.SpreadCard();//가지고 있는 카드로 업데이트
         stopSwitch = true;  //2.5
-        if (userList[userList.FindIndex(x => x.Name == turnText.text)].userCard.Count == 0)
+        if (user.userCard.Count == 0)
         {
             pv.RPC("RoundEnd", RpcTarget.All);
 
@@ -672,12 +672,18 @@ public class GameManager : MonoBehaviour
         float time = 0.0f;
         StartCoroutine(UIAnimation.fadeIn(collectMoneyPanel));
 
-        while (time < 3.0f) {
+        while (true) {
+            if (time > 3.0f) {
+                StartCoroutine(UIAnimation.fadeOut(collectMoneyPanel));
+                pv.RPC("collectMoney", RpcTarget.All);
+                break;
+            }
+
+
             time += Time.deltaTime;
             yield return null;
         }
-        StartCoroutine(UIAnimation.fadeOut(collectMoneyPanel));
-        pv.RPC("collectMoney",RpcTarget.All);
+        
     }
 
 
