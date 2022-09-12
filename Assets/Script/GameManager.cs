@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject deck;
     public GameObject card;
     public GameObject collectMoneyPanel;
+    public GameObject roundPanel;
 
     public RectTransform deckPoint;
     public RectTransform myDeckPoint;
@@ -701,6 +702,26 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         
+    }
+
+    public IEnumerator showRoundPanel()
+    {
+
+        float time = 0.0f;
+        StartCoroutine(UIAnimation.fadeIn(roundPanel));
+
+        while (true)
+        {
+            if (time > 3.0f)
+            {
+                StartCoroutine(UIAnimation.fadeOut(roundPanel));
+                break;
+            }
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
     }
 
 
