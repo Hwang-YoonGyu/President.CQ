@@ -676,6 +676,8 @@ public class GameManager : MonoBehaviour
         pv.RPC("collectMoney",RpcTarget.All);
     }
 
+
+    [PunRPC]
     public void collectMoney() {
         //1등일때
         if (user.rank == 1)
