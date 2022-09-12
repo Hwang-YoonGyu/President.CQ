@@ -964,14 +964,14 @@ public class GameManager : MonoBehaviour
     }
     void giveCardToUser()
     {
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < 13; i++)
         {
             int r = Random.Range(0, CardDeck.Count);
             //giveCard(userList[0].name, CardDeck[r]);
             pv.RPC("giveCard", RpcTarget.All, userList[0].Name, CardDeck[r]);
             CardDeck.RemoveAt(r);
         }
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < 13; i++)
         {
             int r = Random.Range(0, CardDeck.Count);
             //giveCard(userList[1].name, CardDeck[r]);
