@@ -591,11 +591,20 @@ public class GameManager : MonoBehaviour
             checkRanking();
         }
 
+    
+    }
+
+    [PunRPC]
+    public void RoundSet() {
+
         List<User> tempList = new List<User>();
 
-        for (int i = 1; i < 5; i++) {
-            for (int j=0; j < 4; j++) {
-                if (userList[j].rank == i) {
+        for (int i = 1; i < 5; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (userList[j].rank == i)
+                {
                     tempList.Add(userList[j]);
                     break;
                 }
@@ -637,8 +646,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-
     /*---------------------------------------------------------------------------------------*/
     /*---------------------------------------------------------------------------------------*/
     /*---------------------------------------------------------------------------------------*/
@@ -677,6 +684,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < userList.Count; i++) {
             pv.RPC("changeRank", RpcTarget.All, userList[i].Name, userList[i].rank);
         }
+        pv.RPC("RoundSet", RpcTarget.All);
     }
 
 
@@ -720,7 +728,7 @@ public class GameManager : MonoBehaviour
 
         while (true)
         {
-            if (time > 3.0f)
+            if (time > 0.75f)
             {
                 StartCoroutine(UIAnimation.fadeOut(panel));
                 break;
