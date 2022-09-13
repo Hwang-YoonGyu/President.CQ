@@ -579,10 +579,8 @@ public class GameManager : MonoBehaviour
         passCount = 0;
         lastCardSubmitCount = 0;
         count = 0;
-        currentDirection = true;
 
         submitLimitText.text = lastCardSubmitCount.ToString();
-        directionText.text = "3 -> 2";
 
 
         //호스트만 돌아용~
