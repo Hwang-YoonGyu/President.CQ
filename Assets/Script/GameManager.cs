@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public GameObject roundEndPanel;
     public GameObject GameEndPanel;
     public GameObject myTurnPanel;
+    public GameObject allPassPanel;
 
     public RectTransform deckPoint;
     public RectTransform myDeckPoint;
@@ -369,6 +370,7 @@ public class GameManager : MonoBehaviour
         Transform[] deckChildren = deck.GetComponentsInChildren<Transform>();
         if (passCount == 3)
         {
+            StartCoroutine(showNoFunctionPanel(allPassPanel));
             Debug.Log("누적 3pass => 덱초기화");
             foreach (Transform child in deckChildren)
             {
