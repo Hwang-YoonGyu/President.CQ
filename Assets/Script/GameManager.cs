@@ -495,6 +495,7 @@ public class GameManager : MonoBehaviour
             ControlSwitch = true;
             pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
             user.changeColor(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count-1].Substring(1, 2));
+            StartCoroutine(showNoFunctionPanel(myTurnPanel));
             Debug.Log(submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count - 1]);
         }
         else
@@ -711,6 +712,27 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public IEnumerator showNoFunctionPanel(GameObject panel)
+    {
+
+        float time = 0.0f;
+        StartCoroutine(UIAnimation.fadeIn(panel));
+
+        while (true)
+        {
+            if (time > 3.0f)
+            {
+                StartCoroutine(UIAnimation.fadeOut(panel));
+                break;
+            }
+
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+    }
+
     public IEnumerator showRoundEndPanel()
     {
 
@@ -910,7 +932,6 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            StartCoroutine(showRoundEndPanel());
 
         }
         //4등일때
@@ -974,6 +995,8 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        StartCoroutine(showRoundEndPanel());
+
     }
 
     [PunRPC]
