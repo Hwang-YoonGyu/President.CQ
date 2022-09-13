@@ -16,6 +16,7 @@ public abstract class User : MonoBehaviour
     public abstract void SetName();
     public abstract void SpreadCard();
     public int rank = 3;
+    public int score = 0;
 
     public Sprite rank1;
     public Sprite rank2;

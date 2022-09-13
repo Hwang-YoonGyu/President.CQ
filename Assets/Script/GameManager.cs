@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     public bool stopSwitch = false;// if value is true, timer will stop and pass the trun to other user
 
     public string currentTurnTime = "";
-    public bool currentDirection = true; // when this value is true, the direction 3 to 2. and false is reverse direction
+    public bool currentDirection = false; // when this value is true, the direction 3 to 2. and false is reverse direction
     public int lastCardSubmitCount = 0;
 
 
@@ -279,12 +279,12 @@ public class GameManager : MonoBehaviour
             if (currentDirection)
             {
                 currentDirection = false;
-                directionText.text = "2 -> 3";
+                directionText.text = "3 -> 2";
             }
             else
             {
                 currentDirection = true;
-                directionText.text = "3 -> 2";
+                directionText.text = "2 -> 3";
             }
         }
 
@@ -690,6 +690,7 @@ public class GameManager : MonoBehaviour
     public void changeRank(string userName, int rank) {
         foreach (User u in userList) {
             if (u.Name == userName) {
+                u.score += rank;
                 u.rank = rank;
                 u.setFace();
                 break;
