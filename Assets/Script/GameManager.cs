@@ -244,9 +244,9 @@ public class GameManager : MonoBehaviour
         user.userCard.Remove(cardcode);
         if (submittedCard.Count==0)
         {
-            ArrangeCard(deckPoint, cardcode);//1.2
+            ArrangeCard(deckPoint, cardcode, user.Name);//1.2
         }
-        else ArrangeCard(deckPoint, cardcode);//1.2
+        else ArrangeCard(deckPoint, cardcode, user.Name);//1.2
     }
     public void Submit()
     {
@@ -426,9 +426,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+
+
             Debug.Log(cardcode + "카드가 제출됨");
             submittedCard.Add(cardcode);
-            ArrangeCard(deckPoint, cardcode);
+            ArrangeCard(deckPoint, cardcode, name);
             foreach (User u in userList) {
                 if (u.Name == name) {
                     u.userCard.Remove(cardcode);
@@ -440,16 +442,43 @@ public class GameManager : MonoBehaviour
     }
 
     [PunRPC]
-    public void ArrangeCard(RectTransform rect, string cardcode )
+    public void ArrangeCard(RectTransform rect, string cardcode, string userName )
     {
         GameObject temp = Instantiate(card, rect.position, Quaternion.identity); //재생성
 
-        temp.gameObject.GetComponent<RectTransform>().SetPositionAndRotation(new Vector3(rect.position.x + (count - 1) * 30, rect.position.y, 0), Quaternion.identity);
-        temp.GetComponent<RectTransform>().SetParent(deck.GetComponent<RectTransform>());
-        temp.name = cardcode;
-        temp.GetComponent<Card>().CardCode = cardcode;
-        temp.GetComponent<Card>().setCardImg();
-        count++;
+        if (PhotonNetwork.NickName != userName)
+        {
+            User u = user;
+
+            foreach (User user in userList) {
+                if (user.Name == userName) {
+                    u = user;
+                    break;
+                }
+            }
+
+            
+            temp.gameObject.GetComponent<RectTransform>().SetPositionAndRotation(u.transform.position, Quaternion.identity);
+            temp.GetComponent<RectTransform>().SetParent(deck.GetComponent<RectTransform>());
+            temp.name = cardcode;
+            temp.GetComponent<Card>().CardCode = cardcode;
+            temp.GetComponent<Card>().setCardImg();
+            StartCoroutine(UIAnimation.moveCard(temp, u.transform.position, new Vector3(rect.position.x + (count - 1) * 30, rect.position.y, 0)));
+            count++;
+        }
+        else
+        {
+            temp.gameObject.GetComponent<RectTransform>().SetPositionAndRotation(new Vector3(rect.position.x + (count - 1) * 30, rect.position.y, 0), Quaternion.identity);
+            temp.GetComponent<RectTransform>().SetParent(deck.GetComponent<RectTransform>());
+            temp.name = cardcode;
+            temp.GetComponent<Card>().CardCode = cardcode;
+            temp.GetComponent<Card>().setCardImg();
+            count++;
+
+        }
+
+
+
 
     }
 
