@@ -24,9 +24,13 @@ public class GameManager : MonoBehaviour
     public GameObject collectMoneyPanel;
     public GameObject roundStartPanel;
     public GameObject roundEndPanel;
-    public GameObject GameEndPanel;
+    public GameObject gameEndPanelGroup;
     public GameObject myTurnPanel;
     public GameObject allPassPanel;
+    public GameObject gameRank1;
+    public GameObject gameRank2;
+    public GameObject gameRank3;
+    public GameObject gameRank4;
 
     public RectTransform deckPoint;
     public RectTransform myDeckPoint;
@@ -40,10 +44,14 @@ public class GameManager : MonoBehaviour
     public Text turnText;
     public Text directionText;
     public Text submitLimitText;
-
+    public Text rank1;
+    public Text rank2;
+    public Text rank3;
+    public Text rank4;
 
     public PhotonView pv;
     public User user;
+
     //public RoomManager rm;
     public bool ControlSwitch = false;// if not my turn, do not controll the card
 
@@ -57,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     int count;
 
-    int roundCount = 0;
+    int roundCount = 1;
     int passCount = 0;
     float time = 30f;
 
@@ -204,7 +212,13 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator GameOverCountTime()
     {
-        float time = 5f;
+        float time = 10f;
+        gameEndPanelGroup.SetActive(true);
+
+
+        if (PhotonNetwork.NickName == PhotonNetwork.MasterClient.NickName) {
+            checkFinalRanking();
+        }
 
         while (true)
         {
@@ -213,6 +227,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("Game Over");
                 SceneManager.LoadScene("Lobby_Scene");
+                Destroy(GameObject.Find("RoomManager").gameObject);
                 break;
             }
 
@@ -486,7 +501,6 @@ public class GameManager : MonoBehaviour
     public void RoundStart()
     {
         //새로운 라운드 시작
-        roundCount++;
         Debug.Log(roundCount + "라운드 시작");
         user.StartSpreadCard(); // 나의 덱에 카드를 뿌리고
         /*if (userList[0].userCard.Contains("D01")) {
@@ -591,29 +605,27 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void RoundEnd()
     {
-        
-
-        if (roundCount == 4)
-        {
-            Debug.Log("5초 후에 Lobby_Scene으로 이동");
-            StartCoroutine(GameOverCountTime());
-            return;
-            //rm.RoomSetting();
-        }
-
         submittedCard.Clear();// 제출된 카드 리스트 clear
         //정보 초기화
         passCount = 0;
         lastCardSubmitCount = 0;
         count = 0;
+        roundCount++;
 
         submitLimitText.text = lastCardSubmitCount.ToString();
 
 
         //호스트만 돌아용~
         if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
-        { 
-            checkRanking();
+        {
+            if (roundCount == 4)
+            {
+                checkFinalRanking();
+            }
+            else
+            {
+                checkRanking();
+            }
         }
 
     
@@ -667,6 +679,7 @@ public class GameManager : MonoBehaviour
             giveCardToUser();
 
         }
+
         StartCoroutine(showRoundEnd());
     }
 
@@ -709,7 +722,36 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < userList.Count; i++) {
             pv.RPC("changeRank", RpcTarget.All, userList[i].Name, userList[i].rank);
         }
+
         pv.RPC("RoundSet", RpcTarget.All);
+
+    }
+
+    public void checkFinalRanking()
+    {
+        for (int i = 0; i < userList.Count; i++)
+        {
+            userList[i].finalRank = 1;
+        }
+
+
+        for (int i = 0; i < userList.Count; i++)
+        {
+            for (int j = 0; j < userList.Count; j++)
+            {
+                if (userList[i].score > userList[j].score)
+                {
+                    userList[i].finalRank++;
+                }
+             
+            }
+        }
+        for (int i = 0; i < userList.Count; i++)
+        {
+            pv.RPC("changeFinalRank", RpcTarget.All, userList[i].Name, userList[i].rank);
+        }
+
+        StartCoroutine(GameOverCountTime());
     }
 
 
@@ -724,6 +766,51 @@ public class GameManager : MonoBehaviour
             }
         }
         
+    }
+
+    [PunRPC]
+    public void changeFinalRank(string userName, int rank)
+    {
+        foreach (User u in userList)
+        {
+            if (u.Name == userName)
+            {
+                u.finalRank = rank;
+                switch (rank) {
+                    case 1:
+                        if (PhotonNetwork.NickName == userName) {
+                            gameRank1.SetActive(true);
+                        }
+                        rank1.text = userName;
+                        break;
+                    case 2:
+                        if (PhotonNetwork.NickName == userName)
+                        {
+                            gameRank2.SetActive(true);
+                        }
+                        rank2.text = userName;
+                        break;
+                    case 3:
+                        if (PhotonNetwork.NickName == userName)
+                        {
+                            gameRank3.SetActive(true);
+                        }
+                        rank3.text = userName;
+                        break;
+                    case 4:
+                        if (PhotonNetwork.NickName == userName)
+                        {
+                            gameRank4.SetActive(true);
+                        }
+                        rank4.text = userName;
+                        break;
+                }
+                
+            }
+        }
+
+        
+
     }
 
 

@@ -19,6 +19,7 @@ public abstract class User : MonoBehaviour
 
     public int rank = 3;
     public int score = 0;
+    public int finalRank = 0;
 
     public Sprite rank1;
     public Sprite rank2;

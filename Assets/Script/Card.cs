@@ -25,15 +25,13 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         if (gameManager.ControlSwitch)
         {
-
             foreach (string temp in gameManager.submittedCard)
             {
-                if (temp == CardCode) {
-                    Debug.Log(temp+","+CardCode+" compare");
+                if (temp == CardCode)
+                {
                     return;
                 }
             }
-
             wasPosition = rect.position;
             rect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
             
@@ -46,6 +44,13 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         if (gameManager.ControlSwitch)
         {
+            foreach (string temp in gameManager.submittedCard)
+            {
+                if (temp == CardCode)
+                {
+                    return;
+                }
+            }
             rect.position = eventData.position;
         }
     }
