@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
     public User user;
     //public RoomManager rm;
     public bool ControlSwitch = false;// if not my turn, do not controll the card
-    public bool stopSwitch = false;// if value is true, timer will stop and pass the trun to other user
 
     public string currentTurnTime = "";
     public bool currentDirection = false; // when this value is true, the direction 3 to 2. and false is reverse direction
@@ -190,15 +189,17 @@ public class GameManager : MonoBehaviour
 
         while (true) {
             time -= Time.deltaTime;
-            if (time <= 0.0f || stopSwitch) {
+            if (time <= 0.0f) {
                 time = 30.0f;
+                if (turnText.text == PhotonNetwork.NickName) {
+                    Pass();
+                }
                 break;
             }
 
             timeText.text = $"{time:N0}";            
             yield return null;
         }
-        stopSwitch = false;
     }
 
     public IEnumerator GameOverCountTime()
@@ -305,7 +306,6 @@ public class GameManager : MonoBehaviour
             }
         }//나의덱에 있는 카드 먼저 싹 지워버리고
         user.SpreadCard();//가지고 있는 카드로 업데이트
-        stopSwitch = true;  //2.5
         if (user.userCard.Count == 0)
         {
             pv.RPC("RoundEnd", RpcTarget.All);
@@ -354,7 +354,6 @@ public class GameManager : MonoBehaviour
         tempCard.Clear();//3.2
         pv.RPC("TurnEnd", RpcTarget.All, PhotonNetwork.NickName);
 
-        stopSwitch = true;
         
     }
     public void RemoveCardRPC(string cardcode)
@@ -504,7 +503,7 @@ public class GameManager : MonoBehaviour
         {
             ControlSwitch = false;
         }
-
+        time = 30.0f;
         foreach (User u in userList) {
             if (u.Name == userName) {
                 u.turnOnLigit();
