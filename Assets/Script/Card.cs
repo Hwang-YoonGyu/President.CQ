@@ -25,11 +25,17 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         if (gameManager.ControlSwitch)
         {
-            if (gameManager.tempCard.Contains(CardCode) || gameManager.user.userCard.Contains(CardCode))
+
+            foreach (string temp in gameManager.submittedCard)
             {
-                wasPosition = rect.position;
-                rect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                if (temp == CardCode) {
+                    return;
+                }
             }
+
+            wasPosition = rect.position;
+            rect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            
         }
 
     }
