@@ -215,11 +215,6 @@ public class GameManager : MonoBehaviour
         float time = 10f;
         gameEndPanelGroup.SetActive(true);
 
-
-        if (PhotonNetwork.NickName == PhotonNetwork.MasterClient.NickName) {
-            checkFinalRanking();
-        }
-
         while (true)
         {
             time -= Time.deltaTime;
@@ -769,14 +764,14 @@ public class GameManager : MonoBehaviour
     }
 
     [PunRPC]
-    public void changeFinalRank(string userName, int rank)
+    public void changeFinalRank(string userName, int finalRank)
     {
         foreach (User u in userList)
         {
             if (u.Name == userName)
             {
-                u.finalRank = rank;
-                switch (rank) {
+                u.finalRank = finalRank;
+                switch (finalRank) {
                     case 1:
                         if (PhotonNetwork.NickName == userName) {
                             gameRank1.SetActive(true);
