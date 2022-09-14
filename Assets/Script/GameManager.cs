@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
             giveCardToUser();
             pv.RPC("RoundStart",RpcTarget.All);
         }
+        StartCoroutine(TurnCountTime());
 
     }
 
@@ -517,8 +518,6 @@ public class GameManager : MonoBehaviour
     {
         //currentTurnUser = username;
         turnText.text = username;
-        StopCoroutine(TurnCountTime());
-        StartCoroutine(TurnCountTime());
         if(ControlSwitch)
         {
             submit_button.interactable = true;
