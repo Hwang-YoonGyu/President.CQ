@@ -89,7 +89,18 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             else if(isInMyDeck)
             {
                 gameManager.RemoveCard(CardCode);
-                user.changeColor(CardCode.Substring(1, 2));
+
+                if (gameManager.tempCard.Count !=0)
+                {
+                    user.changeColor(gameManager.tempCard[gameManager.tempCard.Count - 1].Substring(1, 2));
+                }
+                else
+                {
+                    if (gameManager.submittedCard.Count != 0)
+                    {
+                        user.changeColor(gameManager.submittedCard[gameManager.submittedCard.Count - 1].Substring(1, 2));
+                    }
+                }
 
 
             }

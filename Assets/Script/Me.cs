@@ -31,7 +31,6 @@ public class Me : User
             temp.GetComponent<Card>().CardCode = s;
             temp.GetComponent<Card>().setCardImg();
             i++;
-            StartCoroutine(UIAnimation.fadeIn(temp));
 
             cardObjList.Add(temp);
         }
