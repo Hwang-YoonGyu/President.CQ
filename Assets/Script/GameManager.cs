@@ -618,7 +618,7 @@ public class GameManager : MonoBehaviour
         //호스트만 돌아용~
         if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
         {
-            if (roundCount == 4)
+            if (roundCount == 2)
             {
                 checkFinalRanking();
             }
