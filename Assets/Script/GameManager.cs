@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     int roundCount = 0;
     int passCount = 0;
-
+    float time = 30f;
 
 
     Dictionary<string, int> ranking = new Dictionary<string, int>();
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator TurnCountTime()
     {
-        float time = 30.0f;
+      
 
         while (true) {
             time -= Time.deltaTime;
@@ -203,7 +203,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator GameOverCountTime()
     {
-        float time = 5f;
+        time = 5f;
 
         while (true)
         {
@@ -704,7 +704,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator showCollectMoneyPanel() {
 
-        float time = 0.0f;
+        time = 0.0f;
         StartCoroutine(UIAnimation.fadeIn(collectMoneyPanel));
 
         while (true) {
@@ -724,7 +724,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator showNoFunctionPanel(GameObject panel)
     {
 
-        float time = 0.0f;
+        time = 0.0f;
         StartCoroutine(UIAnimation.fadeIn(panel));
 
         while (true)
@@ -745,7 +745,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator showRoundEndPanel()
     {
 
-        float time = 0.0f;
+        time = 0.0f;
         StartCoroutine(UIAnimation.fadeIn(roundEndPanel));
 
         while (true)
