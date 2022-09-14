@@ -29,6 +29,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             foreach (string temp in gameManager.submittedCard)
             {
                 if (temp == CardCode) {
+                    Debug.Log(temp+","+CardCode+" compare");
                     return;
                 }
             }
