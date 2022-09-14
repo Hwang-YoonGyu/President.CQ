@@ -7,7 +7,7 @@ public class Me : User
 {
     public Text nameText;
     public GameObject myDeck;
-
+    public GameObject Deck;
     public GameObject card;
     public override string Name { get; set; }
 
@@ -25,12 +25,31 @@ public class Me : User
         int i = 0;
         foreach (string s in userCard) {
 
-            GameObject temp = Instantiate(card, new Vector3(500 + (i*95),200,0), Quaternion.identity);
+            GameObject temp = Instantiate(card, new Vector3(500 + (i * 95), 200, 0), Quaternion.identity);
             temp.GetComponent<RectTransform>().SetParent(myDeck.GetComponent<RectTransform>());
             temp.name = s;
             temp.GetComponent<Card>().CardCode = s;
             temp.GetComponent<Card>().setCardImg();
             i++;
+            StartCoroutine(UIAnimation.fadeIn(temp));
+
+            cardObjList.Add(temp);
+        }
+    }
+
+    public override void StartSpreadCard()
+    {
+        int i = 0;
+        foreach (string s in userCard)
+        {
+
+            GameObject temp = Instantiate(card, Deck.transform.position, Quaternion.identity);
+            temp.GetComponent<RectTransform>().SetParent(myDeck.GetComponent<RectTransform>());
+            temp.name = s;
+            temp.GetComponent<Card>().CardCode = s;
+            temp.GetComponent<Card>().setCardImg();
+            i++;
+            StartCoroutine(UIAnimation.moveCard(temp, Deck.transform.position, new Vector3(500 + (i * 95), 200, 0)));
             StartCoroutine(UIAnimation.fadeIn(temp));
 
             cardObjList.Add(temp);

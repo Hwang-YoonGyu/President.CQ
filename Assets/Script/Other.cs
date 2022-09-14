@@ -42,4 +42,8 @@ public class Other :  User
         currentCards.text = "남은 카드 : " + userCard.Count;
 
     }
+
+    public override void StartSpreadCard()
+    {
+    }
 }

@@ -77,13 +77,13 @@ public class UIAnimation : MonoBehaviour
     }
 
     //카드이동 start end 고정
-    public static IEnumerator moveCard(Vector3 position, Vector3 start ,Vector3 end)
+    public static IEnumerator moveCard(GameObject gameObject, Vector3 start ,Vector3 end)
     {
         float t = 0.0f;
 
-        while (t <= 0.1f)
+        while (t <= 0.5f)
         {
-            position = Vector3.MoveTowards(start,end,t*0.1f);
+            gameObject.transform.position = Vector3.Lerp(start, end, t*2);
             t += Time.deltaTime;
             yield return null;
         }

@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a8434b2483a82474e9e646a6d45f56c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a15060f29e956ec478507acef14ab734, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -531,6 +531,7 @@ MonoBehaviour:
   face: {fileID: 1952108680}
   nameText: {fileID: 823854581}
   myDeck: {fileID: 2014792742}
+  Deck: {fileID: 1950569199}
   card: {fileID: 80280848068272022, guid: a43db947dc8164af48be0965167909b6, type: 3}
 --- !u!1 &235699023
 GameObject:
@@ -1436,7 +1437,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 500}
+  m_SizeDelta: {x: 900, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &710826024
 MonoBehaviour:
@@ -2506,7 +2507,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 500}
+  m_SizeDelta: {x: 700, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1268361046
 MonoBehaviour:
@@ -3862,7 +3863,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a8434b2483a82474e9e646a6d45f56c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4917525a48b998d4887b7b3922b3f8b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4608,7 +4609,6 @@ MonoBehaviour:
   pv: {fileID: 2128010561}
   user: {fileID: 0}
   ControlSwitch: 0
-  stopSwitch: 0
   currentTurnTime: 
   currentDirection: 0
   lastCardSubmitCount: 0

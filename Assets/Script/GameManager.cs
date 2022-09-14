@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
         if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName) {
             initCardDeck();
             giveCardToUser();
-            pv.RPC("RoundStart",RpcTarget.All);
+            pv.RPC("RoundStartRPC",RpcTarget.All);
         }
         StartCoroutine(TurnCountTime());
 
@@ -463,7 +463,7 @@ public class GameManager : MonoBehaviour
         //새로운 라운드 시작
         roundCount++;
         Debug.Log(roundCount + "라운드 시작");
-        user.SpreadCard(); // 나의 덱에 카드를 뿌리고
+        user.StartSpreadCard(); // 나의 덱에 카드를 뿌리고
         /*if (userList[0].userCard.Contains("D01")) {
             pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
         }*/
@@ -566,10 +566,13 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void RoundEnd()
     {
+        
+
         if (roundCount == 4)
         {
             Debug.Log("5초 후에 Lobby_Scene으로 이동");
             StartCoroutine(GameOverCountTime());
+            return;
             //rm.RoomSetting();
         }
 
@@ -739,6 +742,37 @@ public class GameManager : MonoBehaviour
 
     }
 
+    [PunRPC]
+    public void RoundStartRPC()
+    {
+        StartCoroutine(showRoundStartPanel());
+    }
+
+    public IEnumerator showRoundStartPanel()
+    {
+
+        float time = 0.0f;
+        StartCoroutine(UIAnimation.fadeIn(roundStartPanel));
+
+        while (true)
+        {
+            if (time > 0.75f)
+            {
+                StartCoroutine(UIAnimation.fadeOut(roundStartPanel));
+                if (PhotonNetwork.NickName == PhotonNetwork.MasterClient.NickName)
+                {
+                    pv.RPC("RoundStart", RpcTarget.All);
+                }
+                break;
+            }
+
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+    }
+
     public IEnumerator showRoundEndPanel()
     {
 
@@ -751,7 +785,7 @@ public class GameManager : MonoBehaviour
             {
                 StartCoroutine(UIAnimation.fadeOut(roundEndPanel));
                 if (PhotonNetwork.NickName == PhotonNetwork.MasterClient.NickName) {
-                    pv.RPC("RoundStart",RpcTarget.All);
+                    pv.RPC("RoundStartRPC",RpcTarget.All);
                 }
                 break;
             }

@@ -42,6 +42,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (SceneManager.GetActiveScene().name == "Room_Scene") {
             SceneManager.LoadScene("Lobby_Scene");
+            Destroy(this.gameObject);
             return;
         }
     }
