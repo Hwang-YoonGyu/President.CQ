@@ -226,8 +226,8 @@ public class GameManager : MonoBehaviour
             if (time <= 0.0)
             {
                 Debug.Log("Game Over");
-                SceneManager.LoadScene("Lobby_Scene");
                 Destroy(GameObject.Find("RoomManager").gameObject);
+                SceneManager.LoadScene("Lobby_Scene");
                 break;
             }
 
@@ -739,7 +739,7 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < userList.Count; j++)
             {
-                if (userList[i].score > userList[j].score)
+                if (userList[i].score < userList[j].score)
                 {
                     userList[i].finalRank++;
                 }
@@ -808,9 +808,6 @@ public class GameManager : MonoBehaviour
                 
             }
         }
-
-        
-
     }
 
 
