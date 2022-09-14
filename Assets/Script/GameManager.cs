@@ -746,8 +746,13 @@ public class GameManager : MonoBehaviour
         {
             pv.RPC("changeFinalRank", RpcTarget.All, userList[i].Name, userList[i].finalRank);
         }
+        pv.RPC("GameOverRPC", RpcTarget.All);
+    }
 
+    [PunRPC]
+    public void GameOverRPC() {
         StartCoroutine(GameOverCountTime());
+
     }
 
 
