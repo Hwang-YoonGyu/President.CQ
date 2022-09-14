@@ -195,7 +195,6 @@ public class GameManager : MonoBehaviour
                 if (turnText.text == PhotonNetwork.NickName) {
                     Pass();
                 }
-                break;
             }
 
             timeText.text = $"{time:N0}";            
@@ -205,7 +204,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator GameOverCountTime()
     {
-        time = 5f;
+        float time = 5f;
 
         while (true)
         {
@@ -702,7 +701,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator showCollectMoneyPanel() {
 
-        time = 0.0f;
+        float time = 0.0f;
         StartCoroutine(UIAnimation.fadeIn(collectMoneyPanel));
 
         while (true) {
@@ -722,7 +721,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator showNoFunctionPanel(GameObject panel)
     {
 
-        time = 0.0f;
+        float time = 0.0f;
         StartCoroutine(UIAnimation.fadeIn(panel));
 
         while (true)
@@ -743,7 +742,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator showRoundEndPanel()
     {
 
-        time = 0.0f;
+        float time = 0.0f;
         StartCoroutine(UIAnimation.fadeIn(roundEndPanel));
 
         while (true)
