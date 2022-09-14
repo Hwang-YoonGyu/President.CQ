@@ -476,10 +476,6 @@ public class GameManager : MonoBehaviour
             count++;
 
         }
-
-
-
-
     }
 
     /*---------------------------------------------------------------------------------------*/
@@ -671,7 +667,7 @@ public class GameManager : MonoBehaviour
             giveCardToUser();
 
         }
-        StartCoroutine(showCollectMoneyPanel());
+        StartCoroutine(showRoundEnd());
     }
 
 
@@ -731,14 +727,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public IEnumerator showCollectMoneyPanel() {
+    public IEnumerator showRoundEnd() {
 
         float time = 0.0f;
-        StartCoroutine(UIAnimation.fadeIn(collectMoneyPanel));
+        StartCoroutine(UIAnimation.fadeIn(roundEndPanel));
 
         while (true) {
             if (time > 3.0f) {
-                StartCoroutine(UIAnimation.fadeOut(collectMoneyPanel));
+                StartCoroutine(UIAnimation.fadeOut(roundEndPanel));
                 collectMoney();
                 break;
             }
@@ -802,17 +798,17 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public IEnumerator showRoundEndPanel()
+    public IEnumerator showCollecMoney()
     {
 
         float time = 0.0f;
-        StartCoroutine(UIAnimation.fadeIn(roundEndPanel));
+        StartCoroutine(UIAnimation.fadeIn(collectMoneyPanel));
 
         while (true)
         {
             if (time > 3.0f)
             {
-                StartCoroutine(UIAnimation.fadeOut(roundEndPanel));
+                StartCoroutine(UIAnimation.fadeOut(collectMoneyPanel));
                 if (PhotonNetwork.NickName == PhotonNetwork.MasterClient.NickName) {
                     pv.RPC("RoundStartRPC",RpcTarget.All);
                 }
@@ -1064,7 +1060,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(showRoundEndPanel());
+        StartCoroutine(showCollecMoney());
 
     }
 
