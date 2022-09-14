@@ -463,6 +463,7 @@ public class GameManager : MonoBehaviour
             temp.name = cardcode;
             temp.GetComponent<Card>().CardCode = cardcode;
             temp.GetComponent<Card>().setCardImg();
+            Destroy(temp.GetComponent<Card>());
             StartCoroutine(UIAnimation.moveCard(temp, u.transform.position, new Vector3(rect.position.x + (count - 1) * 30, rect.position.y, 0)));
             count++;
         }
@@ -473,6 +474,7 @@ public class GameManager : MonoBehaviour
             temp.name = cardcode;
             temp.GetComponent<Card>().CardCode = cardcode;
             temp.GetComponent<Card>().setCardImg();
+            Destroy(temp.GetComponent<Card>());
             count++;
 
         }
