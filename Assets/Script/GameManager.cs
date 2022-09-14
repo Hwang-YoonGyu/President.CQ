@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("Game Over");
                 Destroy(GameObject.Find("RoomManager").gameObject);
-                SceneManager.LoadScene("Lobby_Scene");
+                PhotonNetwork.LoadLevel("Lobby_Scene");
                 break;
             }
 
@@ -743,7 +743,7 @@ public class GameManager : MonoBehaviour
         }
         for (int i = 0; i < userList.Count; i++)
         {
-            pv.RPC("changeFinalRank", RpcTarget.All, userList[i].Name, userList[i].rank);
+            pv.RPC("changeFinalRank", RpcTarget.All, userList[i].Name, userList[i].finalRank);
         }
 
         StartCoroutine(GameOverCountTime());
