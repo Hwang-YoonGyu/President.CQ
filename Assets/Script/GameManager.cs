@@ -221,6 +221,7 @@ public class GameManager : MonoBehaviour
             if (time <= 0.0)
             {
                 Debug.Log("Game Over");
+                PhotonNetwork.LeaveRoom();
                 Destroy(GameObject.Find("RoomManager").gameObject);
                 PhotonNetwork.LoadLevel("Lobby_Scene");
                 break;
@@ -734,7 +735,7 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < userList.Count; j++)
             {
-                if (userList[i].score < userList[j].score)
+                if (userList[i].score > userList[j].score)
                 {
                     userList[i].finalRank++;
                 }
