@@ -25,8 +25,11 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         if (gameManager.ControlSwitch)
         {
-            wasPosition = rect.position;
-            rect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            if (!gameManager.submittedCard.Contains(CardCode))
+            {
+                wasPosition = rect.position;
+                rect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            }
         }
 
     }
