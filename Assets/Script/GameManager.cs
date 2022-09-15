@@ -291,7 +291,7 @@ public class GameManager : MonoBehaviour
             }     
         }
 
-        if (sameCardCount >= 3) {
+        if (sameCardCount >= 2) {
             pv.RPC("revolution",RpcTarget.All);
         }
 
