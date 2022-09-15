@@ -819,7 +819,7 @@ public class GameManager : MonoBehaviour
             currentDirection = true;
             directionText.text = "1 -> 13";
         }
-        showNoFunctionPanel(revolutionPanel);
+        StartCoroutine(showNoFunctionPanel(revolutionPanel));
     }
 
 
