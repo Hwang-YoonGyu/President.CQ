@@ -68,16 +68,33 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 {
                     lastCard = gameManager.submittedCard.Count == 0 ? "no" : gameManager.submittedCard[gameManager.submittedCard.Count - 1].Substring(1,2);
 
-                    if (lastCard == "no" || lastCard.CompareTo(CardCode.Substring(1, 2)) <= 0)
+                    if (gameManager.currentDirection)
                     {
-                        gameManager.Temp(CardCode);
-                        Destroy(rect.gameObject);
-                        user.changeColor(CardCode.Substring(1, 2));
-                        GameObject.Find("cardsound").GetComponent<AudioSource>().Play();
+
+                        if (lastCard == "no" || lastCard.CompareTo(CardCode.Substring(1, 2)) <= 0)
+                        {
+                            gameManager.Temp(CardCode);
+                            Destroy(rect.gameObject);
+                            user.changeColor(CardCode.Substring(1, 2));
+                            GameObject.Find("cardsound").GetComponent<AudioSource>().Play();
+                        }
+                        else
+                        {
+                            rect.position = wasPosition;
+                        }
                     }
-                    else
-                    {
-                        rect.position = wasPosition;
+                    else {
+                        if (lastCard == "no" || lastCard.CompareTo(CardCode.Substring(1, 2)) >= 0)
+                        {
+                            gameManager.Temp(CardCode);
+                            Destroy(rect.gameObject);
+                            user.changeColor(CardCode.Substring(1, 2));
+                            GameObject.Find("cardsound").GetComponent<AudioSource>().Play();
+                        }
+                        else
+                        {
+                            rect.position = wasPosition;
+                        }
                     }
                 }
                 else 

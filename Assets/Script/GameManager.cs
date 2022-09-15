@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameEndPanelGroup;
     public GameObject myTurnPanel;
     public GameObject allPassPanel;
+    public GameObject revolutionPanel;
     public GameObject gameRank1;
     public GameObject gameRank2;
     public GameObject gameRank3;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     public Text rank2;
     public Text rank3;
     public Text rank4;
+    public Text roundText;
 
     public PhotonView pv;
     public User user;
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
     public bool ControlSwitch = false;// if not my turn, do not controll the card
 
     public string currentTurnTime = "";
-    public bool currentDirection = false; // when this value is true, the direction 3 to 2. and false is reverse direction
+    public bool currentDirection = true; // when this value is true, the direction 3 to 2. and false is reverse direction
     public int lastCardSubmitCount = 0;
 
 
@@ -95,6 +97,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        roundText.text = roundCount.ToString();
         attenderList = GameObject.Find("RoomManager").GetComponent<RoomManager>().attenderList;
         if (attenderList.Count != 4) {
             for (int i = attenderList.Count; i < 4; i++) {
@@ -280,6 +283,7 @@ public class GameManager : MonoBehaviour
             if (null == sameCardTemp || s.Substring(1,2) != sameCardTemp)
             {
                 sameCardTemp = s.Substring(1, 2);
+                sameCardCount = 1;
             }
             else if (sameCardTemp == s.Substring(1, 2)) 
             {
@@ -287,18 +291,8 @@ public class GameManager : MonoBehaviour
             }     
         }
 
-        if (sameCardCount >= 4) {
-            Debug.Log("It's Revolution!");
-            if (currentDirection)
-            {
-                currentDirection = false;
-                directionText.text = "3 -> 2";
-            }
-            else
-            {
-                currentDirection = true;
-                directionText.text = "2 -> 3";
-            }
+        if (sameCardCount >= 3) {
+            pv.RPC("revolution",RpcTarget.All);
         }
 
 
@@ -502,6 +496,7 @@ public class GameManager : MonoBehaviour
         /*if (userList[0].userCard.Contains("D01")) {
             pv.RPC("TurnStart", RpcTarget.All, PhotonNetwork.NickName);
         }*/
+        roundText.text = roundCount.ToString();
 
         foreach (User u in userList) {
             u.setFace();
@@ -809,6 +804,22 @@ public class GameManager : MonoBehaviour
                 
             }
         }
+    }
+
+    [PunRPC]
+    public void revolution() {
+        Debug.Log("It's Revolution!");
+        if (currentDirection)
+        {
+            currentDirection = false;
+            directionText.text = "13 -> 1";
+        }
+        else
+        {
+            currentDirection = true;
+            directionText.text = "1 -> 13";
+        }
+        showNoFunctionPanel(revolutionPanel);
     }
 
 
