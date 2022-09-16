@@ -225,9 +225,10 @@ public class GameManager : MonoBehaviour
             if (time <= 0.0)
             {
                 Debug.Log("Game Over");
+                PhotonNetwork.LoadLevel("Lobby_Scene");
                 PhotonNetwork.LeaveRoom();
                 Destroy(GameObject.Find("RoomManager").gameObject);
-                PhotonNetwork.LoadLevel("Lobby_Scene");
+                
                 break;
             }
 
