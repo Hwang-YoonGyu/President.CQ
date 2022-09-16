@@ -814,12 +814,12 @@ public class GameManager : MonoBehaviour
         if (currentDirection)
         {
             currentDirection = false;
-            directionText.text = "13 > 1";
+            directionText.text = "13 < 1";
         }
         else
         {
             currentDirection = true;
-            directionText.text = "1 > 13";
+            directionText.text = "1 < 13";
         }
         StartCoroutine(showNoFunctionPanel(revolutionPanel));
     }
