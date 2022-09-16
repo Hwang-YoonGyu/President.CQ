@@ -9,6 +9,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public string CardCode = "H13";
     public RectTransform rect;
     private Vector3 wasPosition;
+    private Vector3 wasScale;
     private bool isInSubmitDeck;
     private bool isInMyDeck;
     public User user;
@@ -33,6 +34,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 }
             }
             wasPosition = rect.position;
+            wasScale = rect.localScale;
             rect.localScale = new Vector3(1.3f, 1.3f, 1.3f);
             
         }
@@ -58,9 +60,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public void OnEndDrag(PointerEventData eventData)
     {
         if (gameManager.ControlSwitch)
-        {
-            rect.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            
+        {            
             if (isInSubmitDeck)
             {
                 string lastCard;
@@ -80,6 +80,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                         }
                         else
                         {
+                            rect.localScale = wasScale;
                             rect.position = wasPosition;
                         }
                     }
@@ -93,6 +94,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                         }
                         else
                         {
+                            rect.localScale = wasScale;
                             rect.position = wasPosition;
                         }
                     }
@@ -110,6 +112,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                     }
                     else
                     {
+                        rect.localScale = wasScale;
                         rect.position = wasPosition;
                     }
 
@@ -138,6 +141,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             }
             else
             {
+                rect.localScale = wasScale;
                 rect.position = wasPosition;
             }
         }
