@@ -227,6 +227,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Game Over");
                 PhotonNetwork.LoadLevel("Lobby_Scene");
                 PhotonNetwork.LeaveRoom();
+                
                 Destroy(GameObject.Find("RoomManager").gameObject);
                 
                 break;
@@ -330,6 +331,7 @@ public class GameManager : MonoBehaviour
         //3.1 이동된 카드(tempCard에 있던 카드들 다시 mydeck의 child로 원 위치)
         //3.2 tempCard는 비워지고
         //3.3 nextTurn
+        count = count - tempCard.Count;
 
         pv.RPC("PassCount", RpcTarget.All);
 
@@ -358,7 +360,6 @@ public class GameManager : MonoBehaviour
             user.userCard.Add(cardcode);
         }
         user.SpreadCard();//가지고 있는 카드로 업데이트
-        count = count - tempCard.Count;
         tempCard.Clear();//3.2
         pv.RPC("TurnEnd", RpcTarget.All, PhotonNetwork.NickName);
 
