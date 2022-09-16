@@ -5265,8 +5265,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.4
-  m_Text: "\uB0A8\uC740 \uC2DC\uAC04 :\n\uD604\uC7AC \uCC28\uB840 :\n\uC81C\uCD9C
-    \uBC29\uD5A5 :\n\uCD5C\uC18C \uC81C\uCD9C :"
+  m_Text: "\uB0A8\uC740 \uC2DC\uAC04\n\uD604\uC7AC \uCC28\uB840\n\uC81C\uCD9C \uBC29\uD5A5\n\uCD5C\uC18C
+    \uC81C\uCD9C"
 --- !u!222 &2037248290
 CanvasRenderer:
   m_ObjectHideFlags: 0
