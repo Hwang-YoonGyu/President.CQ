@@ -30,6 +30,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 
             startBtn.onClick.AddListener(() => {
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                PhotonNetwork.CurrentRoom.IsVisible = false;
                 pv.RPC("GameStart", RpcTarget.All);
             });
             exitBtn.onClick.AddListener(() => {
@@ -96,13 +98,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     [PunRPC]
     void GameStart() {
-        if (PhotonNetwork.MasterClient.NickName == PhotonNetwork.NickName)
-        {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-            PhotonNetwork.CurrentRoom.IsVisible = false;
-
-        }
-
+        
         PhotonNetwork.LoadLevel("Game_Scene");
     }
 
