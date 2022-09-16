@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject myTurnPanel;
     public GameObject allPassPanel;
     public GameObject revolutionPanel;
+    public GameObject limitSubmitPanel;
     public GameObject gameRank1;
     public GameObject gameRank2;
     public GameObject gameRank3;
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     public string currentTurnTime = "";
     public bool currentDirection = true; // when this value is true, the direction 3 to 2. and false is reverse direction
-    public int lastCardSubmitCount = 0;
+    public int lastCardSubmitCount = 1;
 
 
     public int cot = 0; //count of turn
@@ -273,6 +274,7 @@ public class GameManager : MonoBehaviour
         //2.5 nextTurn
         
         if (lastCardSubmitCount > tempCard.Count) {
+            StartCoroutine(showNoFunctionPanel(limitSubmitPanel));
             Debug.Log("카드 장수가 너무 적음");
             return;
         }
@@ -387,7 +389,7 @@ public class GameManager : MonoBehaviour
             }
             submittedCard.Clear();
             passCount = 0;
-            lastCardSubmitCount = 0;
+            lastCardSubmitCount = 1;
             count = 0;
         }
         submitLimitText.text = lastCardSubmitCount.ToString();
@@ -599,7 +601,7 @@ public class GameManager : MonoBehaviour
         submittedCard.Clear();// 제출된 카드 리스트 clear
         //정보 초기화
         passCount = 0;
-        lastCardSubmitCount = 0;
+        lastCardSubmitCount = 1;
         count = 0;
         roundCount++;
 
