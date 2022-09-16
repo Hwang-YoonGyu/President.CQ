@@ -2650,7 +2650,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.4
-  m_Text: '1 > 13
+  m_Text: '1 < 13
 
 '
 --- !u!222 &1148582636
