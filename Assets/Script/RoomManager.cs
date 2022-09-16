@@ -81,8 +81,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 startBtn.interactable = true;
             }
         }
-        else if (SceneManager.GetActiveScene().name == "Game_Scene") { 
-            
+        else if (SceneManager.GetActiveScene().name == "Game_Scene")
+        {
+
+        }
+        else if (SceneManager.GetActiveScene().name == "Lobby_Scene")
+        {
+            Destroy(this.gameObject);
         }
     }
 
