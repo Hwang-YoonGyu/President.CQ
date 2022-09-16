@@ -47,9 +47,9 @@ public class Me : User
             temp.name = s;
             temp.GetComponent<Card>().CardCode = s;
             temp.GetComponent<Card>().setCardImg();
-            i++;
             StartCoroutine(UIAnimation.moveCard(temp, Deck.transform.position, new Vector3(500 + (i * 95), 200, 0)));
             StartCoroutine(UIAnimation.fadeIn(temp));
+            i++;
 
             cardObjList.Add(temp);
         }
