@@ -44,6 +44,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
     public void Logout()
     {
         auth.SignOut();
+        Destroy(GameObject.Find("UserInfo").gameObject);
         SceneManager.LoadScene("Login_Scene");
     }
 
