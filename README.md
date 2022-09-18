@@ -10,8 +10,9 @@ Photon Network
 Firebase  
 Google Ads  
     
-  
-#개요  
+      
+      
+### 개요  
 대부호 게임 규칙을 이용한, 수리력과 판단력을 기를 수 있는 간단한 아동용 온라인 게임
   
 ![KakaoTalk_20220918_005413706](https://user-images.githubusercontent.com/75091031/190888704-0828897f-9310-4622-b461-6faf14936a24.jpg)
