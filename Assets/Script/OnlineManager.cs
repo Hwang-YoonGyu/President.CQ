@@ -53,7 +53,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
         for (int i= 0; i < updatedRoomList.Count; i++)
         {
 
-            if (updatedRoomList[i].RemovedFromList || updatedRoomList[i].PlayerCount == 0 || !updatedRoomList[i].IsVisible || !updatedRoomList[i].IsOpen) //변경내용이 삭제일 때
+            if (updatedRoomList[i].RemovedFromList || updatedRoomList[i].PlayerCount == 0 || !updatedRoomList[i].IsVisible || !updatedRoomList[i].IsOpen || updatedRoomList[i].MaxPlayers == 0) //변경내용이 삭제일 때
             {
                 Debug.Log(updatedRoomList[i].Name + " 삭제");
 
