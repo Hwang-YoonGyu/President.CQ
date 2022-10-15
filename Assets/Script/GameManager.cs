@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.SceneManagement;
-public class GameManager : MonoBehaviour
+using Photon.Realtime;
+
+public class GameManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     public List<User> userList;
@@ -1237,6 +1239,28 @@ public class GameManager : MonoBehaviour
             CardDeck.RemoveAt(r);
         }
 
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        //base.OnDisconnected(cause);
+        pv.RPC("removePlayer", RpcTarget.Others, PhotonNetwork.NickName);
+        checkFinalRanking();
+
+
+    }
+
+    [PunRPC]
+    public void removePlayer(string username) 
+    {
+
+        foreach (User u in userList) 
+        {
+            if (u.Name == username) 
+            {
+                u.Name += "(종료됨)";
+            }
+        }
     }
 
 
