@@ -1246,8 +1246,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         //base.OnDisconnected(cause);
         pv.RPC("removePlayer", RpcTarget.Others, PhotonNetwork.NickName);
         checkFinalRanking();
+        
 
 
+    }
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        Debug.Log(otherPlayer.NickName + "이샛기 나갔다!!!!!!!!!!!!!!");
     }
 
     [PunRPC]
