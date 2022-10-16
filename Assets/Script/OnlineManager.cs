@@ -202,7 +202,7 @@ public class OnlineManager : MonoBehaviourPunCallbacks
 
         onlineMonitoringText.text = "연결됨 : 생성된 룸이 없음. 룸을 생성 중...";
         Debug.Log("Creating Room");
-        PhotonNetwork.CreateRoom(PhotonNetwork.NickName+"의 룸", new RoomOptions { MaxPlayers = 0 });
+        PhotonNetwork.CreateRoom(PhotonNetwork.NickName+"의 룸", new RoomOptions { MaxPlayers = 4 });
 
     }
 
