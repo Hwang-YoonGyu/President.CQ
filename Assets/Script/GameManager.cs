@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject gameRank2;
     public GameObject gameRank3;
     public GameObject gameRank4;
+    public GameObject roomleftPanel;
 
     public RectTransform deckPoint;
     public RectTransform myDeckPoint;
@@ -1244,6 +1245,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         Debug.Log(otherPlayer.NickName + " 이샛기 나갔다!!!!!!!!!!!!!!");
+        StartCoroutine(showNoFunctionPanel(roomleftPanel));
 
     }
 
