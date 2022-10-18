@@ -242,6 +242,27 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     }
 
+    public IEnumerator Gameleft()
+    {
+        while (true)
+        {
+            time -= Time.deltaTime;
+            if (time <= 0.0)
+            {
+                Debug.Log("Game Over");
+                PhotonNetwork.LoadLevel("Lobby_Scene");
+                PhotonNetwork.LeaveRoom();
+
+                Destroy(GameObject.Find("RoomManager").gameObject);
+
+                break;
+            }
+
+
+            yield return null;
+        }
+    }
+
 
 
     /*---------------------------------------------------------------------------------------*/
@@ -757,6 +778,19 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     }
 
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        Debug.Log(otherPlayer.NickName + " 이샛기 나갔다!!!!!!!!!!!!!!");
+        StartCoroutine(showNoFunctionPanel(roomleftPanel));
+        pv.RPC("GameLeftRPC", RpcTarget.All);
+
+    }
+
+    [PunRPC]
+    public void GameLeftRPC()
+    {
+        StartCoroutine(Gameleft());
+    }
 
     [PunRPC]
     public void changeRank(string userName, int rank) {
@@ -1242,12 +1276,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     }
 
-    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
-    {
-        Debug.Log(otherPlayer.NickName + " 이샛기 나갔다!!!!!!!!!!!!!!");
-        StartCoroutine(showNoFunctionPanel(roomleftPanel));
 
-    }
 
     [PunRPC]
     public void removePlayer(string username) 
