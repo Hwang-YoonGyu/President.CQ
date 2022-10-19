@@ -5,9 +5,10 @@ using GoogleMobileAds.Api;
 
 public class AdmobBanner : MonoBehaviour
 {
+    public bool isTestMode = true; //출시할 때 false하면 될듯
     public static AdmobBanner instance;
 
-    BannerView bannerView; // �������
+    BannerView bannerView;
 
     public static AdmobBanner Instance
     {
@@ -24,23 +25,16 @@ public class AdmobBanner : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        RequestBanner(); // ��� ���� ����
+        RequestBanner();
     }
 
     private void RequestBanner()
     {
-#if UNITY_EDITOR
-        string adUnitId = "unused";
-#elif UNITY_ANDROID
-    string adUnitId = "ca-app-pub-3940256099942544/6300978111";
-#elif UNITY_IPHONE
-    string adUnitId = "INSERT_IOS_BANNER_AD_UNIT_ID_HERE";
-#else
-        string adUnitId = "unexpected_platform";
-#endif
+        string adUnitTestId = "ca-app-pub-3940256099942544/6300978111";
+        string adUnitId = "ca-app-pub-2905952082881818/9936773928";
 
         // Create a 320x50 banner at the top of the screen.
-        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.TopRight);
+        bannerView = new BannerView(isTestMode ? adUnitTestId : adUnitId, AdSize.Banner, AdPosition.TopRight);
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();

@@ -420,6 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dddaf0277ac74d4cbf3f66286430414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTestMode: 1
 --- !u!4 &160133638
 Transform:
   m_ObjectHideFlags: 0
@@ -2828,7 +2829,6 @@ MonoBehaviour:
   onlineMonitoringText: {fileID: 645988147}
   db: {fileID: 0}
   RandomBtn: {fileID: 302837640}
-  RefreshBtn: {fileID: 0}
   roomPrefab: {fileID: 2461738389371973363, guid: bfebf759e09feb540a08e52ed842f08c, type: 3}
   Content: {fileID: 1103885299}
   makeRoomPanel: {fileID: 1485541290}
@@ -3807,7 +3807,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1903153617}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.99999547
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
