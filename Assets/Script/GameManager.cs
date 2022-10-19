@@ -244,6 +244,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public IEnumerator Gameleft()
     {
+        float time = 5f;
         while (true)
         {
             time -= Time.deltaTime;
