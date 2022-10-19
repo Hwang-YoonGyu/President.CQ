@@ -35,7 +35,7 @@ public class AdmobBanner : MonoBehaviour
         // Create a 320x50 banner at the top of the screen.
         //AdSize adSize = new AdSize(468, 60);
         //BannerView bannerView = new BannerView(isTestMode ? adUnitTestId : adUnitId, adSize, AdPosition.TopRight);
-        BannerView bannerView = new BannerView(isTestMode ? adUnitTestId : adUnitId, AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth/3), AdPosition.Bottom);
+        BannerView bannerView = new BannerView(isTestMode ? adUnitTestId : adUnitId, AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth), AdPosition.Bottom);
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
