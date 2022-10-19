@@ -32,9 +32,10 @@ public class AdmobBanner : MonoBehaviour
     {
         string adUnitTestId = "ca-app-pub-3940256099942544/6300978111";
         string adUnitId = "ca-app-pub-2905952082881818/9936773928";
-
         // Create a 320x50 banner at the top of the screen.
-        bannerView = new BannerView(isTestMode ? adUnitTestId : adUnitId, AdSize.Banner, AdPosition.TopRight);
+        //AdSize adSize = new AdSize(468, 60);
+        //BannerView bannerView = new BannerView(isTestMode ? adUnitTestId : adUnitId, adSize, AdPosition.TopRight);
+        BannerView bannerView = new BannerView(isTestMode ? adUnitTestId : adUnitId, AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth/3), AdPosition.Bottom);
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
