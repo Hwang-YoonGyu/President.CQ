@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
 
-public class AdmobBanner : MonoBehaviour
+public class AdmobAndroidBanner : MonoBehaviour
 {
     public bool isTestMode = true; //출시할 때 false하면 될듯
-    public static AdmobBanner instance;
+    public static AdmobAndroidBanner instance;
 
     BannerView bannerView;
 
-    public static AdmobBanner Instance
+    public static AdmobAndroidBanner Instance
     {
         get { return instance; }
     }
