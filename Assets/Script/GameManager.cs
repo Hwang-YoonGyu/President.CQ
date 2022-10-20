@@ -254,7 +254,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
                 Debug.Log("Game Over");
                 PhotonNetwork.LeaveRoom();
-                SceneManager.LoadScene("Lobby_Scene");
 
 
                 Destroy(GameObject.Find("RoomManager").gameObject);
@@ -788,6 +787,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         StartCoroutine(showNoFunctionPanel(roomleftPanel));
         pv.RPC("GameLeftRPC", RpcTarget.All);
 
+    }
+
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene("Lobby_Scene");
     }
 
     [PunRPC]
