@@ -785,19 +785,18 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(otherPlayer.NickName + " 이샛기 나갔다!!!!!!!!!!!!!!");
         StartCoroutine(showNoFunctionPanel(roomleftPanel));
+        StartCoroutine(Gameleft());
+
 
     }
 
     public override void OnLeftRoom()
     {
+
         SceneManager.LoadScene("Lobby_Scene");
     }
 
-    [PunRPC]
-    public void GameLeftRPC()
-    {
-        StartCoroutine(Gameleft());
-    }
+    
 
     [PunRPC]
     public void changeRank(string userName, int rank) {
