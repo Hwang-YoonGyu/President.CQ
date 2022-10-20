@@ -251,8 +251,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (time <= 0.0)
             {
                 Debug.Log("Game Over");
-                PhotonNetwork.LeaveRoom();
                 PhotonNetwork.LoadLevel("Lobby_Scene");
+                PhotonNetwork.Disconnect();
 
                 Destroy(GameObject.Find("RoomManager").gameObject);
 
