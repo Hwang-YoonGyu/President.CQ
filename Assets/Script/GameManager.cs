@@ -244,15 +244,15 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public IEnumerator Gameleft()
     {
-        float time = 5f;
+        float time = 3f;
         while (true)
         {
             time -= Time.deltaTime;
             if (time <= 0.0)
             {
                 Debug.Log("Game Over");
-                PhotonNetwork.LoadLevel("Lobby_Scene");
                 PhotonNetwork.LeaveRoom();
+                PhotonNetwork.LoadLevel("Lobby_Scene");
 
                 Destroy(GameObject.Find("RoomManager").gameObject);
 
