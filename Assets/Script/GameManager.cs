@@ -785,7 +785,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(otherPlayer.NickName + " 이샛기 나갔다!!!!!!!!!!!!!!");
         StartCoroutine(showNoFunctionPanel(roomleftPanel));
-        pv.RPC("GameLeftRPC", RpcTarget.All);
 
     }
 
