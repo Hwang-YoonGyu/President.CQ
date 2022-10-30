@@ -552,7 +552,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC] //02
     public void TurnStart(string userName)
     {
-        if (userName == PhotonNetwork.NickName)
+        if (PhotonNetwork.IsMasterClient && userName.Contains("AI")) {
+            autoCalc(userName);
+            return; //리턴 중요, if else문 밖에 foreach 안 돌릴거임
+        }
+        else if (userName == PhotonNetwork.NickName)
         {
             ControlSwitch = true;
             pv.RPC("setTurn", RpcTarget.All, PhotonNetwork.NickName);
@@ -564,6 +568,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             ControlSwitch = false;
         }
+
+
         time = 30.0f;
         foreach (User u in userList) {
             if (u.Name == userName) {
@@ -572,6 +578,26 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
     }
+    //로컬 함수
+    public void autoCalc(string aiName) {
+
+        User ai;
+
+        time = 30.0f;
+        foreach (User u in userList)
+        {
+            if (u.Name == aiName)
+            {
+                ai = u;
+                u.turnOnLigit();
+                break;
+            }
+        }
+
+        //현재 상황에서 낼 수있는 카드를 제출
+        //pv.RPC("submit", RPCtarget.All, "카드코드");
+    }
+
 
     [PunRPC] //03
     public void setTurn(string username)
