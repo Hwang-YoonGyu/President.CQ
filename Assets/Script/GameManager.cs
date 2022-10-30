@@ -553,6 +553,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void TurnStart(string userName)
     {
         if (PhotonNetwork.IsMasterClient && userName.Contains("AI")) {
+            ControlSwitch = false;
             autoCalc(userName);
             return; //리턴 중요, if else문 밖에 foreach 안 돌릴거임
         }
@@ -594,8 +595,43 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
 
-        //현재 상황에서 낼 수있는 카드를 제출
-        //pv.RPC("submit", RPCtarget.All, "카드코드");
+
+
+        //int[] a = new int[4];
+        //a.Append(123);
+        //시간제어 하는 코루틴, 이 코루틴안에서 AI가 뭘 낼지 계산이 되어야함 
+        //배열로 잡자(배열이 가벼움)
+        //그 코루틴이 끝날때, for문 돌려서 카드배열(array[])  pv.RPC("submit", RPCtarget.All, array[i]);
+        //pass();
+    }
+    public IEnumerator calcBestCode(User ai)
+    {
+        List<string> cardCodeArr = new List<string>(); //가변 1장낼거면 하나 들어있을거고,
+
+        string lastValue = submittedCard.Count == 0 ? "no" : submittedCard[submittedCard.Count - 1].Substring(1, 2); // 05, 13
+        
+        //cardCodeArr.Add();
+        //
+
+
+
+
+        float time = 0.0f;
+
+        while (true)
+        {
+            if (time > 5.0f)
+            {
+                for (int i=0; i<cardCodeArr.Count; i++) {
+                    pv.RPC("Submitted", RpcTarget.All, cardCodeArr[i], PhotonNetwork.NickName, tempCard.Count);
+                }
+                pv.RPC("TurnEnd",RpcTarget.All, ai.Name);
+                break;
+            }
+
+            time += Time.deltaTime;
+            yield return null;
+        }
     }
 
 
