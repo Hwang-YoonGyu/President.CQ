@@ -600,6 +600,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         //배열로 잡자(배열이 가벼움)
         //그 코루틴이 끝날때, for문 돌려서 카드배열(array[])  pv.RPC("submit", RPCtarget.All, array[i]);
         //pass();
+        //빨리만들자
     }
     public IEnumerator calcBestCode(User ai)
     {
